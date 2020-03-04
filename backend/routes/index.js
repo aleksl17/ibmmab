@@ -11,8 +11,25 @@ db.once('open', function() {
   // we're connected!
 });
 
+/*
 var kittySchema = new mongoose.Schema({
   name: String
+});
+*/
+
+var scraperSchema = new mongoose.Schema({
+  keyword: String,
+  url: String,
+  author: String
+
+});
+
+var analysisSchema = new mongoose.Schema({
+  title: String,
+
+  url: String,
+  author: String
+
 });
 
 // NOTE: methods must be added to the schema before compiling it with mongoose.model()
