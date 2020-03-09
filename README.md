@@ -47,6 +47,11 @@ Download [Node.js LTS](https://nodejs.org/). \
 NodeJS Chocolatey not required.
 
 
+### DB Request API Syntax (' not included)
+```
+http://localhost:3000/api/anData?author='authorName'
+```
+
 
 # Scraper ReadMe
 
