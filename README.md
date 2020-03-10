@@ -39,7 +39,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## Necessary libs
 
 ### MongoDB
-Download [MongoDB V4.x](https://www.mongodb.com/download-center/cloud/). \
+Download [MongoDB V4.x](https://www.mongodb.com/download-center/community). \
 MongoDB Compass not required.
 
 ### NodeJS
