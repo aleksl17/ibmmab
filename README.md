@@ -46,11 +46,16 @@ MongoDB Compass not required.
 Download [Node.js LTS](https://nodejs.org/). \
 NodeJS Chocolatey not required.
 
+### DB Request API ALL DB Entries Syntax
+```
+http://localhost:3000/api/anData
+```
 
-### DB Request API Syntax (' not included)
+### DB Request API Specific DB Syntax (' not included)
 ```
 http://localhost:3000/api/anData?author='authorName'
 ```
+
 
 
 # Scraper ReadMe
