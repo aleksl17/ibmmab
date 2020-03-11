@@ -58,7 +58,6 @@ exData0.save(function (err, exData0) {
   if (err) return console.error(err);
   //exData0.speak();
 });
-
 exData1.save(function (err, exData1) {
   if (err) return console.error(err);
   //exData1.speak();
@@ -120,7 +119,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type');
   res.setHeader('Access-Control-Allow-Credentials', true);
   next();
 });
