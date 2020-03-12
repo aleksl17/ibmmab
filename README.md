@@ -59,7 +59,7 @@ npm install
 ### How to Create Configuration for backend
 Top right, press "Add Configuration...". Create a new Node.js config. \
 Set "Working directory" as '~\ibmmab\backend.' \
-set "JavaScript file:" as 'bin\www'
+set "JavaScript file:" as 'bin\www' \
 Set "Environment variables:" as 'DEBUG=backend:*' \
 \
 Optional \
