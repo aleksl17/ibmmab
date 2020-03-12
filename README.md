@@ -82,7 +82,7 @@ http://localhost:3000/api/anData?title='title'&author='authorName'
 ```
 http://localhost:3000/api/anData/add?text='text'&title='title'&author='authorName'&url='url'&scrape_date='dateFormat-yyy-mm-dd'
 ```
-copy-paste-able:
+Copy-paste-able:
 ```
 http://localhost:3000/api/anData/add?text=&title=&author=&url=&scrape_date=
 ```
