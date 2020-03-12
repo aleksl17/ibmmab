@@ -68,15 +68,27 @@ Enable open browser after launch, with URL:'http://localhost:3000/'
 
 ## API Syntax
 
-### DB Request API ALL DB Entries Syntax
+### DB Request/GET API ALL DB Entries Syntax
 ```
 http://localhost:3000/api/anData
 ```
 
-### DB Request API Specific DB Syntax (' not included)
+### DB Request/GET API Specific DB Syntax (' not included)
 ```
-http://localhost:3000/api/anData?author='authorName'
+http://localhost:3000/api/anData?title='title'&author='authorName'
 ```
+
+### DB SET API via URL (' not included)
+```
+http://localhost:3000/api/anData/add?text='text'&title='title'&author='authorName'&url='url'&scrape_date='dateFormat-yyy-mm-dd'
+```
+copy-paste-able:
+```
+http://localhost:3000/api/anData/add?text=&title=&author=&url=&scrape_date=
+```
+
+### DB SET API Manually/via HTML
+Go to http://localhost:3000/ it is on the index page.
 
 
 
