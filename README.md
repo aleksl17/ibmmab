@@ -1,6 +1,9 @@
 # General
 
+
+
 ## Remember to add to global .gitignore before uplaoding!
+
 
 
 ## Also remember to add to the global ReadMe if you wish to do so.
@@ -8,6 +11,8 @@
 
 
 # Vue frontend ReadMe
+
+
 
 ## Project setup
 ```
@@ -45,6 +50,23 @@ MongoDB Compass not required.
 ### NodeJS
 Download [Node.js LTS](https://nodejs.org/). \
 NodeJS Chocolatey not required.
+
+## Project Setup
+```
+npm install
+```
+
+### How to Create Configuration for backend
+Top right, press "Add Configuration...". Create a new Node.js config. \
+Set "Working directory" as '~\ibmmab\backend.' \
+set "JavaScript file:" as 'bin\www'
+Set "Environment variables:" as 'DEBUG=backend:*' \
+\
+Optional \
+Browser/Live Edit -> Open browser. \
+Enable open browser after launch, with URL:'http://localhost:3000/'
+
+## API Syntax
 
 ### DB Request API ALL DB Entries Syntax
 ```
