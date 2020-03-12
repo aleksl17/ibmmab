@@ -33,6 +33,7 @@ AnalysisDataSchema.methods.speak = function () {
 */
 
 //COMMENT OUT [FROM HERE] OR A NEW ENTRY WILL BE MADE AT EVERY LAUNCH
+/*
 var exData0 = new anData( {
   //text: 'Polartorsken er viktig for både fugl, fisk og pattedyr. Mindre sjøis og varmere vann kan gi arten skikkelige utfordringer. – Dette er den viktigste arten i den artkiske næringskjeden. Det forteller forsker Mats Huserbråten ved Havforskningsinstituttet. Han har vært med på en studie hvor de har sett på polartorsken. En nøkkelart i økosystemet i Barentshavet. Den gyter under havisen, og lever på en diett av dyreplankton. Den er selv mat til minst 30 forskjellige arter i Barentshavet, ifølge Huserbråten. Han forklarer at prognoser viser at Barentshavet vil bli varmere og tilnærmet isfritt innen 2030. Dårlig nytt for flere arter. – Opptil ti prosent av dietten til skreien består av polartorsk. Mange pattedyr er i ulik grad avhengig av den som føde. Som narhval, vågehval, knølhval og hvithval. Samt blåkveite, hyse og en del fuglarter. Lengre nord enn før Forskerne har blant annet sett på hvor polartorsken gyter, og hvordan bestanden har endret seg. De har også forsøkt å sette rekruttering til bestanden, opp mot et endret klima. – Det har vært antatt at hoveddelen av bestanden gyter i et område sørøst i Barentshavet. Studien bekreftet dette, men viste også gyteaktivitet ved Svalbard. Det interessante med Svalbard, er at gytefeltet lå 50 mil lengre sørøst på 90-tallet. Én av grunnene til at dette har flyttet seg nordover, kan være varmere hav, sier forskeren. Lav rekruttering Også når man på dette området i Barentshavet, hvor mye av bestanden gyter, tegner det seg et interessant bilde: – Høyere temperatur og lite sjø is gir lav rekruttering. I 1995 var det ikke noe is i dette området. Da var det også veldig dårlig rekruttering. At polartorsken sliter med å reprodusere seg selv på grunn av nedgang i isdekke om vinteren, pekes på som dårlig nytt. Uten at man helt vet konsekvensene. Havforskninga skriver også at færre larver når voksen alder på grunn av varmere vann om sommeren. – Vi vet at havet her vil bli varmere i fremtiden. Bestanden kan bli marginalisert i Barentshavet. Mulig vil hele bestanden kollapse. Eller trekke seg østover, langs den russiske kontinetnalsokkelen. Blir endring Bestanden er størst rundt Barentshavet, som historisk sett har hatt den største gytebiomassen, forklarer forskeren. Nøyaktig hvor stor bestanden er, vet man ikke så mye om. Dette er nemlig en sjenert art. Den finnes dog trolig i store deler av Polhavet. Det som er sannsynlig, er uansett at man kan vente seg endring i Arktis på den ene eller andre måten. – Det kan ha en effekt på lofotfiske. Skreien kan komme til å måtte spise andre arter polartorsk, som er en feit og fin art for skreien. Vi vet ikke sikkert, men det vil bli endring. Hele den arktiske næringskjeden kan komme til å flytte på seg. En artikkel hos ScienceNews i februar påpekte hvordan støy fra økende skipstrafikk kan være en annen utfordring for fisken. Studien ble for ikke lenge siden trukket fram av av instituttet selv som «Årets publikasjon». Den kan leses her.',
   text: 'Polartorsken',
@@ -62,6 +63,7 @@ exData1.save(function (err, exData1) {
   if (err) return console.error(err);
   //exData1.speak();
 });
+ */
 //[TO HERE]
 
 //Outputs DB entries in console.
@@ -69,13 +71,8 @@ anData.find(function (err, anDatas) {
   if (err) return console.error(err);
   console.log(anDatas);
 })
+//Rich query example
 //anData.find({ name: /^Polar/ }, callback);
-
-
-
-
-
-
 
 
 

@@ -3,3 +3,20 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+
+  form(action="/api/anData" method="post")
+    input(type="text" name="text" placeholder="Text")
+    br
+    input(type="text" name="title" placeholder="Title")
+    br
+    input(type="text" name="author" placeholder="Author")
+    br
+    input(type="text" name="url" placeholder="URL")
+    br
+    input(type="text" name="scrape_date" placeholder="Scrape Date")
+    br
+    input(type="text" name="score" placeholder="Score")
+    br
+    input(type="text" name="sentiment" placeholder="Sentiment")
+    br
+    input(type="submit" value="Submit")
