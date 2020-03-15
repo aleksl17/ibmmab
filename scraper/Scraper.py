@@ -11,9 +11,6 @@ aftenposten_miljo = newspaper.build("https://www.aftenposten.no/tag/Milj%C3%B8",
 dagbladet_miljo = newspaper.build('https://www.dagbladet.no/emne/milj%C3%B8', memoize_articles=False)
 norge_miljo = newspaper.build('https://www.google.com/search?q=norge+milj%C3%B8&source=lnms&tbm=nws&sa=X', memoize_articles=False)
 
-
-
-
 def recive_and_parse(url):
     article = Article(url)
     article.download()
@@ -39,7 +36,6 @@ def no_to_en(no_text):
 #     vital_info(article)
 #     #print(article.text)
 #     print(no_to_en(article.text))
-
 
 def NRK_miljø():
     NRK_paper = newspaper.build('https://www.nrk.no/emne/klima-og-miljo-1.4295299', memoize_articles=False)
