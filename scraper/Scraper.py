@@ -5,6 +5,15 @@ from googletrans import Translator
 translator = Translator()
 test_url = "https://www.nrk.no/urix/koronaviruset-kutter-en-firedel-av-kinas-klimagassutslipp-1.14922099"
 
+#list of places to get articles from major news sites in Norway.
+aftenposten_klima = newspaper.build("https://www.aftenposten.no/tag/Klima_og_milj%C3%B8", memoize_articles=False)
+aftenposten_miljo = newspaper.build("https://www.aftenposten.no/tag/Milj%C3%B8", memoize_articles=False)
+dagbladet_miljo = newspaper.build('https://www.dagbladet.no/emne/milj%C3%B8', memoize_articles=False)
+norge_miljo = newspaper.build('https://www.google.com/search?q=norge+milj%C3%B8&source=lnms&tbm=nws&sa=X', memoize_articles=False)
+
+
+
+
 def recive_and_parse(url):
     article = Article(url)
     article.download()
@@ -31,10 +40,6 @@ def no_to_en(no_text):
 #     #print(article.text)
 #     print(no_to_en(article.text))
 
-aftenposten_klima = newspaper.build("https://www.aftenposten.no/tag/Klima_og_milj%C3%B8", memoize_articles=False)
-aftenposten_miljo = newspaper.build("https://www.aftenposten.no/tag/Milj%C3%B8", memoize_articles=False)
-dagbladet_miljo = newspaper.build('https://www.dagbladet.no/emne/milj%C3%B8', memoize_articles=False)
-norge_miljo = newspaper.build('https://www.google.com/search?q=norge+milj%C3%B8&source=lnms&tbm=nws&sa=X', memoize_articles=False)
 
 def NRK_miljø():
     NRK_paper = newspaper.build('https://www.nrk.no/emne/klima-og-miljo-1.4295299', memoize_articles=False)
