@@ -10,7 +10,9 @@
 
 
 <script>
-    import * as axios from "core-js";
+
+    //import * as axios from "axios";
+    const axios = require('axios').default;
 
     export default {
         name: "Main_Page",
@@ -21,7 +23,6 @@
 
             return {
                 Greeting: focus(),
-                Response: axios.response(),
             }
 
         },
@@ -31,7 +32,7 @@
                 .then(response => (this.info = response))
         }
     }
-    function focus()
+/*    function focus()
     {
        //var MongoClient = require("mongodb").MongoClient;
         var j=0;
@@ -45,6 +46,7 @@
       }
         return y;
     }
+*/
 
 </script>
 
