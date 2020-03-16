@@ -2,7 +2,7 @@
 <template>
     <div class="Main" id="main">
         <h1>{{msg}}</h1>
-        <p id="p_1">{{info}}</p>
+        <p id="p_1" v-html="info"></p>
 
 
     </div>
@@ -10,19 +10,21 @@
 
 
 <script>
-
     //import * as axios from "axios";
     const axios = require('axios').default;
+    import json from
 
     export default {
         name: "Main_Page",
         props: {
             msg: String,
+
         },
         data()  {
 
             return {
                 Greeting: focus(),
+                info: json
             }
 
         },
