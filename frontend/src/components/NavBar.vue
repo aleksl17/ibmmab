@@ -1,12 +1,15 @@
 
 <template>
     <div class="topnav" id="topnavbar">
-        <btn class="topnavbtn" onclick="window.location=#main">
-        <span>Home</span>
-        </btn>
-        <btn class="topnavbtn" onclick="window.location='https://www.ibm.com/no-en';">
-        <span>IBM</span>
-        </btn>
+        <v-btn class="topnavbtn" onclick="window.location=#main">
+            <span>Home</span>
+        </v-btn>
+        <v-btn class="topnavbtn" onclick="window.location='localhost:3000'">
+            <span>BACKEND</span>
+        </v-btn>
+        <v-btn class="topnavbtn" onclick="window.location='https://www.ibm.com/no-en';">
+            <span>IBM</span>
+        </v-btn>
     </div>
 </template>
 
@@ -33,7 +36,7 @@ a
 {
     background: black;
     height: 50px;
-    width: 25vw;
+    width: 32vw;
     border-width: thin;
     border: white;
     border-style: double;

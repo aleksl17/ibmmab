@@ -2,7 +2,12 @@
 <template>
     <div class="Main" id="main">
         <h1>{{msg}}</h1>
-        <p id="p_1" v-html="info"></p>
+            <ul>
+                <li v-for="text in dbImport" v-bind:key="text">{{ text }}</li>
+            </ul>
+               <p v-html="dbImports"></p>
+
+            <p >This works?</p>
 
 
     </div>
@@ -10,45 +15,45 @@
 
 
 <script>
-    //import * as axios from "axios";
-    const axios = require('axios').default;
-    import json from
 
-    export default {
+
+    const axios = require('axios').default;
+
+    export default
+    {
         name: "Main_Page",
         props: {
             msg: String,
-
-        },
-        data()  {
-
-            return {
-                Greeting: focus(),
-                info: json
-            }
+            info: String,
+            dbImport: JSON,
 
         },
         mounted () {
             axios
                 .get('http://localhost:3000/api/anData')
-                .then(response => (this.info = response))
+                .then(response => (this.dbImport = response))
+        },
+        data()  {
+
+            return {
+                dbImports: toHtml(this.dbImport),
+            }
+
         }
     }
-/*    function focus()
-    {
-       //var MongoClient = require("mongodb").MongoClient;
-        var j=0;
-        var MongoClient = [1,2,3,4,5,6,7,8];
-        var y = "Results";
 
-      for (j = 0; j < MongoClient.length; j++)
-      {
-          if(MongoClient[j] > 3)
-            y += "<li>" + MongoClient[j] + "</li>";
-      }
-        return y;
+    function toHtml(db)
+    {
+        var output = "";
+        var text = "";
+        for(text in db)
+        {
+              output += text + "/br";
+        }
+        return output;
     }
-*/
+
+
 
 </script>
 
