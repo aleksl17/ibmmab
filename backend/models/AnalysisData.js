@@ -10,4 +10,6 @@ var AnalysisDataSchema = new mongoose.Schema({
     sentiment: {type: String, default: '0'}
 });
 
+AnalysisDataSchema.set('toJSON', {getters: true, virtuals: false});
+
 module.exports = mongoose.model('AnalysisData', AnalysisDataSchema);

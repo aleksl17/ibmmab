@@ -23,7 +23,7 @@ if (dotEnvResult.error) {
 }
 //console.log(dotEnvResult.parsed);
 
-//Database setup
+//Mongoose database setup
 mongoose.connect('mongodb://localhost/ibmmab', {useUnifiedTopology: true, useNewUrlParser: true});
 
 var db = mongoose.connection;
