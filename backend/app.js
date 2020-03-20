@@ -44,8 +44,8 @@ var discovery = new DiscoveryV1({
 
 /*
 var addDocumentParams = {
-  environmentId: '2d5724eb-2d7d-4fbf-8fef-9c142a96f8d7',
-  collectionId: 'b4371500-ffbf-4b76-af87-923621540142',
+  environmentId: process.env.WATSON_ENVIRONMENT_ID,
+  collectionId: process.env.WATSON_COLLECTION_ID,
   file: fs.createReadStream('./test-doc1.html'),
 };
 
