@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var dotenv = require('dotenv');
 var mongoose = require('mongoose');
 var anData = require('./models/AnalysisData');
 
@@ -11,6 +12,13 @@ var usersRouter = require('./routes/users');
 var apiRouter = require('./routes/api');
 
 var app = express();
+
+//.env setup
+var dotEnvResult = dotenv.config();
+if (dotEnvResult.error) {
+  throw dotEnvResult.error
+}
+//console.log(dotEnvResult.parsed);
 
 //Database setup
 mongoose.connect('mongodb://localhost/ibmmab', {useUnifiedTopology: true, useNewUrlParser: true});
@@ -21,6 +29,32 @@ db.on('connected', console.log.bind(console, 'DB Connected!'));
 db.once('open', function() {
   // we're connected!
 });
+
+//Watson Discovery setup
+var discovery = new DiscoveryV1({
+  version: '2019-04-30',
+  authenticator: new IamAuthenticator({
+    apikey: process.env.WATSON_API_KEY,
+  }),
+  url: process.env.WATSON_URL,
+});
+
+/*
+var addDocumentParams = {
+  environmentId: '2d5724eb-2d7d-4fbf-8fef-9c142a96f8d7',
+  collectionId: 'b4371500-ffbf-4b76-af87-923621540142',
+  file: fs.createReadStream('./test-doc1.html'),
+};
+
+discovery.addDocument(addDocumentParams)
+    .then(response => {
+      var documentAccepted = response.result;
+      console.log(JSON.stringify(documentAccepted, null, 2));
+    })
+    .catch(err => {
+      console.log('error:', err);
+    });
+*/
 
 /*
 //Will be moved to AnalysisData.js if needed.
@@ -67,10 +101,12 @@ exData1.save(function (err, exData1) {
 //[TO HERE]
 
 //Outputs DB entries in console.
+/*
 anData.find(function (err, anDatas) {
   if (err) return console.error(err);
   console.log(anDatas);
 })
+*/
 //Rich query example
 //anData.find({ name: /^Polar/ }, callback);
 

@@ -56,6 +56,13 @@ NodeJS Chocolatey not required.
 npm install
 ```
 
+### Create .env file
+```
+cp env.template .env
+```
+
+Then enter your credentials.
+
 ### How to Create Configuration for backend
 CONFIG INCLUDED IN LATEST EDITION! \
 \
