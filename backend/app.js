@@ -6,6 +6,9 @@ var logger = require('morgan');
 var dotenv = require('dotenv');
 var mongoose = require('mongoose');
 var anData = require('./models/AnalysisData');
+var fs = require('fs');
+var DiscoveryV1 = require('ibm-watson/discovery/v1');
+var { IamAuthenticator} = require('ibm-watson/auth');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
