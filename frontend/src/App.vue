@@ -1,14 +1,13 @@
 <template>
   <div id="app">
     <NavBar></NavBar> <!-- NavBar -->
-    <Main_Page msg="Environment Analysis"></Main_Page> <!-- Main Page -->
+    <Main_Page msg="Environment Analysis" response=data></Main_Page> <!-- Main Page -->
   </div>
 </template>
 
 <script>
-import Main_Page from "@/components/Main_Page" //import main page
-import NavBar from "@/components/NavBar";
-//Import Top bar
+import Main_Page from "@/components/Main_Page" //Import main page
+import NavBar from "@/components/NavBar"; //Import Top bar
 
 
 

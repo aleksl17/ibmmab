@@ -3,7 +3,7 @@
     <div class="Main" id="main">
         <h1>{{msg}}</h1>
             <ul>
-                <li v-for="text in dbImport" v-bind:key="text">{{ text }}</li>
+                <li >{{ info }}</li>
             </ul>
                <p v-html="dbImports"></p>
 
@@ -28,15 +28,26 @@
             dbImport: JSON,
 
         },
-        mounted () {
-            axios
-                .get('http://localhost:3000/api/anData')
-                .then(response => (this.dbImport = response))
+        mounted: function () {
+            axios({
+                method: 'get',
+                url: 'http://localhost:3000/api/anData',
+                responseType: 'json'
+            })
+            .then(function(response){
+                for(var each in response.data.text)
+                {
+                    this.info += each + '/br';
+                }
+
+            });
+
+
         },
         data()  {
 
             return {
-                dbImports: toHtml(this.dbImport),
+                dbImports: toHtml(this.response),
             }
 
         }
@@ -45,13 +56,14 @@
     function toHtml(db)
     {
         var output = "";
-        var text = "";
-        for(text in db)
+
+        for(var each in db)
         {
-              output += text + "/br";
+              output += each + "/br";
         }
         return output;
     }
+
 
 
 

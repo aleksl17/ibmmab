@@ -4,7 +4,7 @@
         <v-btn class="topnavbtn" onclick="window.location=#main">
             <span>Home</span>
         </v-btn>
-        <v-btn class="topnavbtn" onclick="window.location='localhost:3000'">
+        <v-btn class="topnavbtn" onclick="window.location='http://localhost:3000/api/anData'">
             <span>BACKEND</span>
         </v-btn>
         <v-btn class="topnavbtn" onclick="window.location='https://www.ibm.com/no-en';">
