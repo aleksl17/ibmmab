@@ -2,7 +2,7 @@
 <template>
     <div class="Main" id="main">
         <h1>{{msg}}</h1>
-        <p>Result: </p>
+        <p>Result ({{info.data.length}} hits):  </p>
             <ul>
                 <li v-for="num in info.data" v-bind:key="info.data[num]" >{{num.title}} ( {{num.author}} ): <a :href="num.url" >Read more</a></li>
             </ul>
@@ -49,7 +49,7 @@ h1  {
     }
 
 ul li   {
-            list-style-type: none;
+            list-style-type: decimal;
             margin: 8px 0;
         }
 
