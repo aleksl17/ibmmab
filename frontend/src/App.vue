@@ -4,16 +4,16 @@
     <div class="logo">
       IBMMAB
     </div>
+    <Burger></Burger>
+    </nav>
     <NavBar></NavBar> <!-- NavBar -->
-  </nav>
-
-    <!-- <Sidebar>
+    <Sidebar>
       <ul class="sidebar-panel-nav">
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-    </Sidebar> <-- Sidebar -->
+    </Sidebar> <!-- Sidebar -->
     <Main_Page msg="Environment Analysis" response=data></Main_Page> <!-- Main Page -->
   </div>
 </template>
@@ -21,7 +21,8 @@
 <script>
 import Main_Page from "@/components/Main_Page" //Import main page
 import NavBar from "@/components/NavBar";
-//import Sidebar from "./components/Sidebar"; //Import Top bar
+import Burger from "./components/menu/Burger";
+import Sidebar from "./components/menu/Sidebar";
 
 
 
@@ -30,7 +31,9 @@ export default {
   components: {
     //Sidebar, //Adding the components
     Main_Page,
-    NavBar
+    NavBar,
+    Burger,
+    Sidebar
 
 
   }
@@ -42,9 +45,27 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  text-align: left;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 20px;
+}
+
+.main-nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0.8rem;
+}
+
+ul.sidebar-panel-nav {
+  list-style-type: none;
+}
+
+ul.sidebar-panel-nav > li > a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.5rem;
+  display: block;
+  padding-bottom: 0.5em;
 }
   @import "./assets/main.css"; /* Importing an external css */
 </style>

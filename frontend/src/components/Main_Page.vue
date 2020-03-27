@@ -2,9 +2,11 @@
 <template>
     <div class="Main" id="main">
         <h1>{{msg}}</h1>
+        <p>Result: </p>
             <ul>
-                <li v-for="num in info.data" v-bind:key="info.data[num]" ><a href="">{{ num.text}} : {{num.author}}</a></li>
+                <li v-for="num in info.data" v-bind:key="info.data[num]" >{{num.title}} ( {{num.author}} ): <a :href="num.url" >Read more</a></li>
             </ul>
+
     </div>
 </template>
 
@@ -48,7 +50,9 @@ h1  {
 
 ul li   {
             list-style-type: none;
+            margin: 8px 0;
         }
+
 
 
 
