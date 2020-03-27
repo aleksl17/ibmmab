@@ -2,7 +2,7 @@
   <div id="app">
     <nav class="main-nav">
     <div class="logo">
-      IBMMAB
+      IBMMAB - Alpha
     </div>
     <Burger></Burger>
     </nav>
@@ -20,16 +20,15 @@
 
 <script>
 import Main_Page from "@/components/Main_Page" //Import main page
-import NavBar from "@/components/NavBar";
-import Burger from "./components/menu/Burger";
-import Sidebar from "./components/menu/Sidebar";
+import NavBar from "@/components/NavBar"; //Import Navigation-bar
+import Burger from "./components/menu/Burger"; //Import the small icon for the Menu
+import Sidebar from "./components/menu/Sidebar"; //Import Sidebar
 
 
 
 export default {
   name: 'App',
-  components: {
-    //Sidebar, //Adding the components
+  components: { //Adding the components
     Main_Page,
     NavBar,
     Burger,
