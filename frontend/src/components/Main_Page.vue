@@ -3,13 +3,8 @@
     <div class="Main" id="main">
         <h1>{{msg}}</h1>
             <ul>
-                <li >{{ info }}</li>
+                <li v-for="num in info.data" v-bind:key="info.data[num]" ><a href="">{{ num.text}} : {{num.author}}</a></li>
             </ul>
-               <p v-html="dbImports"></p>
-
-            <p >This works?</p>
-
-
     </div>
 </template>
 
@@ -19,54 +14,25 @@
 
     const axios = require('axios').default;
 
+
     export default
     {
         name: "Main_Page",
-        props: {
+
+        props:
+        {
             msg: String,
-            info: String,
-            dbImport: JSON,
+            info: Array
 
         },
         mounted: function () {
-            axios({
-                method: 'get',
-                url: 'http://localhost:3000/api/anData',
-                responseType: 'json'
-            })
-            .then(function(response){
-                for(var each in response.data.text)
-                {
-                    this.info += each + '/br';
-                }
-
-            });
-
+            axios
+                .get('http://localhost:3000/api/anData')
+                .then(response => (this.info = response.data))
 
         },
-        data()  {
 
-            return {
-                dbImports: toHtml(this.response),
-            }
-
-        }
     }
-
-    function toHtml(db)
-    {
-        var output = "";
-
-        for(var each in db)
-        {
-              output += each + "/br";
-        }
-        return output;
-    }
-
-
-
-
 </script>
 
 
@@ -79,5 +45,11 @@ h1  {
     font-size: xx-large;
     margin: 50px 0 0;
     }
+
+ul li   {
+            list-style-type: none;
+        }
+
+
 
 </style>

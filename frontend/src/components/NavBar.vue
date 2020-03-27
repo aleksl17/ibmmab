@@ -32,11 +32,20 @@ a
 
     }
 
+.topnav
+{
+    width: 100%;
+    height: auto;
+    alignment: top;
+
+}
+
+
 .topnavbtn
 {
-    background: black;
+    background: forestgreen;
     height: 50px;
-    width: 32vw;
+    width: 33%;
     border-width: thin;
     border: white;
     border-style: double;
