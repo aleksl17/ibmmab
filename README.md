@@ -96,13 +96,23 @@ Go to http://localhost:3000/ it is on the index page.
 
 # Scraper ReadMe
 
-## Installation
+## Setup
 
-step one install python 3.8.x  (Remember to add to path in installer)\
+##Python
+step one install python 3.8.x from https://www.python.org/downloads/ 
+###You must check the button to ad path in the installer
 
-set project interpritor virtual env python 3.8 with path C:\Users\"YourUsernameHere"\AppData\Local\Programs\Python\Python38
+Set the project interpritor to virtual env python 3.8 with path* in your IDE. \
+Path should be
+```
+ C:\Users\"YourUsernameHere"\AppData\Local\Programs\Python\Python38
+```
+from the installation
 
-Run this to install all requirements
+##Pip
+
+Run this to install all requirement
 ```
 pip install requirements.txt
 ```
+
