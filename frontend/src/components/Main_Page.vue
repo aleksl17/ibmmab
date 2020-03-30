@@ -32,14 +32,21 @@
             axios
                 .get('http://localhost:3000/api/anData')
                 .then(response => (this.info = response.data)) //We get all the data from database, and insert it into out info-array
+                .catch(error => {
+                    if (!error.response) {
+                        // network error
+                        this.errorStatus = 'Error: Network Error';
+                    }else {
+                        console.log(error)
+                    }
+                })
+        },
+        data() {
+            return{
+                word: searchWord.get(),
+            }
 
         },
-        data(){
-
-        },
-        methods: {
-            word: searchWord.get()
-        }
 
     }
 </script>

@@ -10,7 +10,7 @@ export const mutations = {
         }
 };
 
-var sWord = "";
+var sWord = "Miljø";
 
 export const searchWord = {
     set(word) {
