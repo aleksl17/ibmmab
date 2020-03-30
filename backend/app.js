@@ -3,8 +3,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var dotenv = require('dotenv');
 var mongoose = require('mongoose');
 var anData = require('./models/AnalysisData');
+var fs = require('fs');
+var DiscoveryV1 = require('ibm-watson/discovery/v1');
+var { IamAuthenticator} = require('ibm-watson/auth');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -12,7 +16,14 @@ var apiRouter = require('./routes/api');
 
 var app = express();
 
-//Database setup
+//.env setup
+var dotEnvResult = dotenv.config();
+if (dotEnvResult.error) {
+  throw dotEnvResult.error
+}
+//console.log(dotEnvResult.parsed);
+
+//Mongoose database setup
 mongoose.connect('mongodb://localhost/ibmmab', {useUnifiedTopology: true, useNewUrlParser: true});
 
 var db = mongoose.connection;
@@ -21,6 +32,32 @@ db.on('connected', console.log.bind(console, 'DB Connected!'));
 db.once('open', function() {
   // we're connected!
 });
+
+//Watson Discovery setup
+var discovery = new DiscoveryV1({
+  version: '2019-04-30',
+  authenticator: new IamAuthenticator({
+    apikey: process.env.WATSON_API_KEY,
+  }),
+  url: process.env.WATSON_URL,
+});
+
+/*
+var addDocumentParams = {
+  environmentId: process.env.WATSON_ENVIRONMENT_ID,
+  collectionId: process.env.WATSON_COLLECTION_ID,
+  file: fs.createReadStream('./test-doc1.html'),
+};
+
+discovery.addDocument(addDocumentParams)
+    .then(response => {
+      var documentAccepted = response.result;
+      console.log(JSON.stringify(documentAccepted, null, 2));
+    })
+    .catch(err => {
+      console.log('error:', err);
+    });
+*/
 
 /*
 //Will be moved to AnalysisData.js if needed.
@@ -67,10 +104,12 @@ exData1.save(function (err, exData1) {
 //[TO HERE]
 
 //Outputs DB entries in console.
+/*
 anData.find(function (err, anDatas) {
   if (err) return console.error(err);
   console.log(anDatas);
 })
+*/
 //Rich query example
 //anData.find({ name: /^Polar/ }, callback);
 
