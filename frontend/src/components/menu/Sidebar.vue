@@ -4,9 +4,11 @@
         <transition name="slide">
             <div v-if="isPanelOpen" class="sidebar-panel">
                 <slot></slot>
-                <div class="searchBarForm" su>
-                    <input class="searchBar" type="text" placeholder="..." onclick="this.setSelectionRange(0, this.value.length)">
-                    <button class="searchBarBtn" type="submit">Search</button>
+                <div class="searchBarForm" >
+                    <input class="searchBar" type="text" placeholder="Search..." v-model="input1"
+                           onclick="this.setSelectionRange(0, this.value.length)" v-on:keyup.enter="submit1">
+
+                    <button id="inputBtn" class="searchBarBtn" type="submit" v-on:click="submit1" >Search</button>
                 </div>
             </div>
 
@@ -15,22 +17,42 @@
 </template>
 
 <script>
-    import {store, mutations} from "../../store";
+    import {store, mutations, searchWord} from "../../store";
 
     export default {
 
-        methods: {
-            closeSidebarPanel: mutations.toggleNav
+        data(){
+            return {
+                input1: ""
+            }
         },
+
+        methods: {
+            closeSidebarPanel: mutations.toggleNav,
+
+            submit1(){
+                searchWord.set(this.input1);
+                console.log(searchWord.get())
+                this.input1 = "";
+            }
+        },
+
         computed: {
             isPanelOpen() {
                 return store.isNavOpen
             }
-        }
+        },
     }
+
+
 </script>
 
 <style scoped>
+
+    button{
+        cursor: pointer;
+    }
+
     .slide-enter-active,
     .slide-leave-active {
         transition: transform 0.2s ease;

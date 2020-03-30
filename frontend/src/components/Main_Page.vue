@@ -1,6 +1,7 @@
 <template>
     <div class="Main" id="main">
         <h1>{{msg}}</h1>
+        <p >Word: {{word}}</p>
         <p>Result ({{info.data.length}} hits):  </p>
         <!-- We create a list, which has a element for each entry in the info-array -->
             <ul>
@@ -15,6 +16,7 @@
 
 
     const axios = require('axios').default; //What we've using to read from the db
+    import {searchWord} from "../store";
 
     export default
     {
@@ -32,6 +34,12 @@
                 .then(response => (this.info = response.data)) //We get all the data from database, and insert it into out info-array
 
         },
+        data(){
+
+        },
+        methods: {
+            word: searchWord.get()
+        }
 
     }
 </script>

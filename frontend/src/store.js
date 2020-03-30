@@ -9,3 +9,15 @@ export const mutations = {
             store.isNavOpen = !store.isNavOpen
         }
 };
+
+var sWord = "";
+
+export const searchWord = {
+    set(word) {
+        sWord = word;
+    },
+
+    get(){
+        return sWord;
+    }
+};
