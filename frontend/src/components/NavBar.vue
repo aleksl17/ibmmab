@@ -1,12 +1,15 @@
 
 <template>
     <div class="topnav" id="topnavbar">
-        <btn class="topnavbtn" onclick="window.location=#main">
-        <span>Home</span>
-        </btn>
-        <btn class="topnavbtn" onclick="window.location='https://www.ibm.com/no-en';">
-        <span>IBM</span>
-        </btn>
+        <button class="topnavbtn" id="btn1" onclick="window.location=#main">
+            <span>Home</span>
+        </button>
+        <button class="topnavbtn" id="btn2" onclick="window.location='http://localhost:3000/api/anData'">
+            <span>Backend</span>
+        </button>
+        <button class="topnavbtn" id="btn3" onclick="window.location='https://www.ibm.com/no-en';">
+            <span>IBM</span>
+        </button>
     </div>
 </template>
 
@@ -29,29 +32,35 @@ a
 
     }
 
-.topnavbtn
+.topnav
 {
-    background: black;
-    height: 50px;
-    width: 25vw;
-    border-width: thin;
-    border: white;
-    border-style: double;
-    float: left;
-    color: white;
-    text-align: center;
-    line-height: 50px;
-
+    width: 100%;
+    height: auto;
+    alignment: top;
 
 }
 
 #topnavbar
 {
 
-        content: "";
-        display: table;
-        clear: both;
-    }
+    content: "";
+    display: table;
+    clear: both;
+}
+.topnavbtn
+{
+    background: forestgreen;
+    height: 50px;
+    width:  33%;
+    border: thin double white;
+    float: left;
+    color: white;
+    text-align: center;
+    line-height: 50px;
+    font-size: 18px;
+
+
+}
 
 .topnavbtn span
 {
