@@ -103,6 +103,13 @@ exData1.save(function (err, exData1) {
 
 //[TO HERE]
 
+//Drop/Delete DB
+/*
+anData.remove({}, function (err) {
+  console.log('Collection Removed')
+});
+*/
+
 //Outputs DB entries in console.
 /*
 anData.find(function (err, anDatas) {
