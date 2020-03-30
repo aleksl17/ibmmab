@@ -56,7 +56,16 @@ NodeJS Chocolatey not required.
 npm install
 ```
 
+### Create .env file
+```
+cp env.template .env
+```
+
+Then enter your credentials.
+
 ### How to Create Configuration for backend
+CONFIG INCLUDED IN LATEST EDITION! \
+\
 Top right, press "Add Configuration...". Create a new Node.js config. \
 Set "Working directory" as '~\ibmmab\backend.' \
 Set "JavaScript file:" as 'bin\www' \
@@ -94,4 +103,13 @@ Go to http://localhost:3000/ it is on the index page.
 
 # Scraper ReadMe
 
-## There's nothing here yet, move along.
+## Installation
+
+step one install python 3.8.x  (Remember to add to path in installer)\
+
+set project interpritor virtual env python 3.8 with path C:\Users\"YourUsernameHere"\AppData\Local\Programs\Python\Python38
+
+Run this to install all requirements
+```
+pip install requirements.txt
+```
