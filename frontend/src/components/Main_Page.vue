@@ -1,13 +1,19 @@
 <template>
     <div class="Main" id="main">
-        <h1>{{msg}}</h1>
+        <h1>Environment Analysis</h1>
         <p >Word: {{word}}</p>
+
+        <div v-if="loaded===true">
         <p>Result ({{info.data.length}} hits):  </p>
         <!-- We create a list, which has a element for each entry in the info-array -->
             <ul>
                 <li v-for="num in info.data" v-bind:key="info.data[num]" >{{num.title}} ( {{num.author}} ): <a :href="num.url" >Read more</a></li>
             </ul>
-
+        </div>
+        <div v-else>
+            <h3>Result 0 hits:</h3>
+            <p>Is the database online?</p>
+        </div>
     </div>
 </template>
 
@@ -25,17 +31,28 @@
         props:
         {
             msg: String, //The msg/title is set in App.Vue
-            info: Array //This array contains all the output from the database
+            info: Array, //This array contains all the output from the database
+
 
         },
-        mounted: function () {
+        mounted:  function () {
             axios
                 .get('http://localhost:3000/api/anData')
+                .catch(error => {
+                    if (!error) {
+                        // network error
+                        this.errorStatus = 'Error: Network Error';
+                        this.loaded = false;
+                    }else {
+                        console.log(error)
+                    }
+                })
                 .then(response => (this.info = response.data)) //We get all the data from database, and insert it into out info-array
                 .catch(error => {
                     if (!error.response) {
                         // network error
                         this.errorStatus = 'Error: Network Error';
+                        this.loaded = false;
                     }else {
                         console.log(error)
                     }
@@ -43,11 +60,17 @@
         },
         data() {
             return{
-                word: searchWord.get(),
+                loaded: true
             }
 
         },
-
+        computed: {
+            word: function () {
+                if(searchWord.isChanged()===true)
+                    searchWord.isChanged();
+                return searchWord.get();
+            },
+        }
     }
 </script>
 

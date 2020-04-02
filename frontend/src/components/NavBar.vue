@@ -1,9 +1,9 @@
 
 <template>
     <div class="topnav" id="topnavbar">
-        <button class="topnavbtn" id="btn1" onclick="window.location=#main">
+        <router-link class="topnavbtn" tag="button" to="/">
             <span>Home</span>
-        </button>
+        </router-link>
         <button class="topnavbtn" id="btn2" onclick="window.location='http://localhost:3000/api/anData'">
             <span>Backend</span>
         </button>
@@ -58,6 +58,7 @@ a
     text-align: center;
     line-height: 50px;
     font-size: 18px;
+    outline: 0;
 
 
 }

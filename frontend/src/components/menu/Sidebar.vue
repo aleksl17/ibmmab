@@ -31,9 +31,16 @@
             closeSidebarPanel: mutations.toggleNav,
 
             submit1(){
-                searchWord.set(this.input1);
-                console.log(searchWord.get())
-                this.input1 = "";
+                if(this.input1 === "")
+                {
+                    console.log("Submit with nothing")
+                }
+                else {
+                    searchWord.set(this.input1);
+                    console.log(searchWord.get());
+                    this.input1 = "";
+                    searchWord.isChanged();
+                }
             }
         },
 
