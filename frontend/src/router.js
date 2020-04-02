@@ -20,7 +20,7 @@ export default new Router({
         {
             path: "/contact",
             name: "contact",
-            components: () =>
+            component: () =>
                 import("./components/Pages/Contact")
         }
     ]
