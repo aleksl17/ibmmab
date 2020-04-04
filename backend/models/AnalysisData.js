@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var AnalysisDataSchema = new mongoose.Schema({
+const AnalysisDataSchema = new mongoose.Schema({
     text: {type: String, trim: true, default: ''},
     title: {type: String, trim: true, default: ''},
     author: {type: String, trim: true, default: ''},
