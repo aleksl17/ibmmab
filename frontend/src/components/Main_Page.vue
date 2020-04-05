@@ -1,15 +1,34 @@
 <template>
     <div class="Main" id="main">
         <h1>Environment Analysis</h1>
-        <p >Word: {{word}}</p>
-
+        <p id="wordP" v-if="word !== ''">Word: {{word}}</p>
         <div v-if="loaded===true">
         <p>Result ({{info.data.length}} hits):  </p>
         <!-- We create a list, which has a element for each entry in the info-array -->
             <ul>
-                <li v-for="num in info.data" v-bind:key="info.data[num]" >{{num.title}} ( {{num.author}} ): <a :href="num.url" >Read more</a></li>
+                <li v-for="num in info.data.slice(0,max_entries)" v-bind:key="info.data[num]" >
+                    <p class="output"> {{num.scrape_date.substr(0,10)}}</p>
+                    <h3 class="output">
+                        {{num.title}}
+                    </h3>
+                    <h4 class="output">
+                        {{num.author}}
+                    </h4>
+                    <div v-if="num.sentiment === '1'">
+                        Sentiment: <img class="smiley" src="../assets/happysmiley.png">
+                    </div>
+                    <div v-if="num.sentiment === '0'">
+                        Sentiment: <img class="smiley" src="../assets/sadsmiley.png">
+                    </div>
+                    <div>
+                        <a :href="num.url" >Read more</a>
+                    </div>
+                </li>
             </ul>
+            <button id="loadBtn" v-on:click="loadMore">Load More</button>
+
         </div>
+
         <div v-else>
             <h3>Result 0 hits:</h3>
             <p>Is the database online?</p>
@@ -21,8 +40,11 @@
 <script>
 
 
+    import router from "../router";
+
     const axios = require('axios').default; //What we've using to read from the db
-    import {searchWord} from "../store";
+    import {searchWord, store} from "../store";
+
 
     export default
     {
@@ -60,7 +82,8 @@
         },
         data() {
             return{
-                loaded: true
+                loaded: true,
+
             }
 
         },
@@ -70,6 +93,19 @@
                     searchWord.isChanged();
                 return searchWord.get();
             },
+            max_entries: function() {
+                return store.max_entries
+            }
+
+
+        },
+        methods: {
+            loadMore()
+            {
+                store.max_entries += 10;
+                console.log("loadMore clicked max_entries is now: " + store.max_entries);
+                router.push({ path: '/' });
+            }
         }
     }
 </script>
@@ -86,10 +122,58 @@ h1  {
     }
 
 ul li   {
-            list-style-type: decimal;
-            margin: 8px 0;
+            list-style-type: none;
+            margin: 50px 0;
+            width: 50%;
         }
 
+ul>li:nth-child(odd){
+
+    }
+
+ul>li:nth-child(even){
+
+}
+
+.smiley{
+    height: 20px;
+    width: 20px;
+    line-height: 0;
+}
+
+.output {
+    width: auto;
+    line-break: auto;
+    overflow: hidden;
+    word-wrap: break-spaces;
+    margin-top: 7px;
+    margin-bottom: 7px;
+
+}
+
+h4  {
+    color: #565656;
+}
+
+#loadBtn
+{
+    background: #30c93f;
+    height: 50px;
+    width:  20%;
+    border: thin double white;
+    float: left;
+    color: white;
+    text-align: center;
+    line-height: 50px;
+    font-size: 18px;
+    outline: 0;
+    margin-bottom: 20px;
+    margin-left: 30px;
+}
+#wordP
+{
+    font-size: 20px;
+}
 
 
 

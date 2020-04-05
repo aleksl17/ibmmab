@@ -33,10 +33,16 @@ export default {
     Burger,
     Sidebar
   },
+  created() {
+
+  }
 }
 </script>
 
 <style>
+  body{
+    background-color: rgba(48, 186, 201, 0.14);
+  }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

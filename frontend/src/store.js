@@ -3,6 +3,7 @@ import Vue from "vue";
 export const store = Vue.observable({
     isNavOpen: false,
     isWordChanged: false,
+    max_entries: 10
 });
 
 export const mutations = {
@@ -12,7 +13,7 @@ export const mutations = {
 };
 
 
-var sWord = "Miljø";
+var sWord = "";
 
 export const searchWord = {
     set(word) {
