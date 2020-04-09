@@ -69,5 +69,6 @@ ul.sidebar-panel-nav > li > .btn {
   display: block;
   padding-bottom: 0.5em;
 }
+
   @import "./assets/main.css"; /* Importing an external css */
 </style>

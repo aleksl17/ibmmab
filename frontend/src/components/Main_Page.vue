@@ -28,6 +28,34 @@
             <button id="loadBtn" v-on:click="loadMore">Load More</button>
 
         </div>
+        <div v-else-if="loaded===true && word">
+            <p>Result ({{newInfo.data.length}} hits):  </p>
+            <!-- We create a list, which has a element for each entry in the info-array -->
+            <!--
+            <ul>
+                <li v-for="num in newInfo.data.slice(0,max_entries)" v-bind:key="newInfo.data[num]" >
+                    <p class="output"> {{num.scrape_date.substr(0,10)}}</p>
+                    <h3 class="output">
+                        {{num.title}}
+                    </h3>
+                    <h4 class="output">
+                        {{num.author}}
+                    </h4>
+                    <div v-if="num.sentiment === '1'">
+                        Sentiment: <img class="smiley" src="../assets/happysmiley.png">
+                    </div>
+                    <div v-if="num.sentiment === '0'">
+                        Sentiment: <img class="smiley" src="../assets/sadsmiley.png">
+                    </div>
+                    <div>
+                        <a :href="num.url" >Read more</a>
+                    </div>
+                </li>
+            </ul>
+            -->
+            <button id="loadBtn" v-on:click="loadMore">Load More</button>
+
+        </div>
 
         <div v-else>
             <h3>Result 0 hits:</h3>
@@ -54,12 +82,13 @@
         {
             msg: String, //The msg/title is set in App.Vue
             info: Array, //This array contains all the output from the database
+            /*newInfo: Array*/
 
 
         },
         mounted:  function () {
             axios
-                .get('http://localhost:3000/api/anData')
+                .get('http://'+this.urlStart + ':3000/api/anData')
                 .catch(error => {
                     if (!error) {
                         // network error
@@ -83,6 +112,7 @@
         data() {
             return{
                 loaded: true,
+                urlStart: 'localhost'
 
             }
 
@@ -91,11 +121,18 @@
             word: function () {
                 if(searchWord.isChanged()===true)
                     searchWord.isChanged();
+
+                try {
+                    this.searchFor(searchWord.get());
+                }
+                catch (e) {
+                    console.log(e)
+                }
                 return searchWord.get();
             },
             max_entries: function() {
                 return store.max_entries
-            }
+            },
 
 
         },
@@ -105,6 +142,61 @@
                 store.max_entries += 10;
                 console.log("loadMore clicked max_entries is now: " + store.max_entries);
                 router.push({ path: '/' });
+            },
+           searchFor()
+            {
+                if(searchWord.get() === '')
+                {
+                    axios
+                        .get('http://'+this.urlStart+':3000/api/anData')
+                        .catch(error => {
+                            if (!error) {
+                                // network error
+                                this.errorStatus = 'Error: Network Error';
+                                this.loaded = false;
+                            }
+                            else
+                            {
+                                console.log(error)
+                            }
+                        })
+                        .then(response => (this.info = response.data)) //We get all the data from database, and insert it into out info-array
+                        .catch(error => {
+                            if (!error.response) {
+                                // network error
+                                this.errorStatus = 'Error: Network Error';
+                                this.loaded = false;
+                            }
+                            else
+                            {
+                                console.log(error)
+                            }
+                        })
+                }
+                else {
+
+                    axios
+                        .get('http://'+this.urlStart+':3000/api/anData?text=' + searchWord.get())
+                        .catch(error => {
+                            if (!error) {
+                                // network error
+                                this.errorStatus = 'Error: Network Error';
+                                this.loaded = false;
+                            } else {
+                                console.log(error)
+                            }
+                        })
+                        .then(response => (this.info = response.data)) //We get all the data from database, and insert it into out info-array
+                        .catch(error => {
+                            if (!error.response) {
+                                // network error
+                                this.errorStatus = 'Error: Network Error';
+                                this.loaded = false;
+                            } else {
+                                console.log(error)
+                            }
+                        })
+                }
             }
         }
     }

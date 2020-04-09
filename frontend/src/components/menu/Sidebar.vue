@@ -3,12 +3,17 @@
         <div class="sidebar-backdrop" @click="closeSidebarPanel" v-if="isPanelOpen"></div>
         <transition name="slide">
             <div v-if="isPanelOpen" class="sidebar-panel">
+                <div id="burger">
+                    <Burger></Burger>
+                </div>
                 <slot></slot>
                 <p id="tip">Tip: Type removeWord to remove search filter</p>
                 <div class="searchBarForm" >
-                    <input class="searchBar" type="text" placeholder="Search..." v-model="input1"
-                           onclick="this.setSelectionRange(0, this.value.length)" v-on:keyup.enter="submit1">
-
+                    <input class="searchBar" type="text" placeholder="Search..."
+                           v-model="input1"
+                           onclick="this.setSelectionRange(0, this.value.length)"
+                           v-on:keyup.enter="submit1" />
+                    <!--@keydown.space.prevent-->
                     <button id="inputBtn" class="searchBarBtn" type="submit" v-on:click="submit1" >Search</button>
                 </div>
             </div>
@@ -20,13 +25,17 @@
 <script>
     import {store, mutations, searchWord} from "../../store";
     import router from "../../router";
+    import Burger from "./Burger";
 
     export default {
-
+        components: {Burger},
         data(){
             return {
                 input1: ""
             }
+        },
+        comments: {
+          Burger
         },
 
         methods: {
@@ -54,7 +63,7 @@
                     router.push({ path: '/' });
 
                 }
-            }
+            },
         },
 
         computed: {
@@ -73,6 +82,12 @@
         cursor: pointer;
     }
 
+    #burger{
+        position: relative;
+        top: -10px;
+        right: -130px;
+    }
+
     .slide-enter-active,
     .slide-leave-active {
         transition: transform 0.2s ease;
@@ -80,7 +95,7 @@
 
     .slide-enter,
     .slide-leave-to {
-        transform: translateX(-100%);
+        transform: translateX(100%);
         transition: all 150ms ease-in 0s;
     }
 
@@ -90,7 +105,7 @@
         height: 100vh;
         position: fixed;
         top: 0;
-        left: 0;
+        right: 0;
         cursor: pointer;
     }
 
@@ -98,7 +113,7 @@
         overflow-y: auto;
         background-color: #75c930;
         position: fixed;
-        left: 0;
+        right: 0;
         top: 0;
         height: 100vh;
         z-index: 999;
@@ -108,7 +123,7 @@
     .searchBarForm {
         position: fixed;
         bottom: 20px;
-        left: 10px;
+        right: 10px;
         background: #ffffff;
         height: 1.5rem;
         width: 300px;
@@ -129,6 +144,7 @@
         border: none;
         white-space: nowrap;
         font-size: 18px;
+
 
 
     }
@@ -152,7 +168,7 @@
     #tip{
         position: fixed;
         color: white;
-        left: 10px;
+        right: 10px;
         bottom: 100px;
         opacity: 60%;
 
