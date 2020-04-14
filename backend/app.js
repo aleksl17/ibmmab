@@ -4,10 +4,10 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-const anData = require('./models/AnalysisData');
+//const anData = require('./models/AnalysisData');
 const dotEnvSetup = require('./setups/dotEnvSetup');
 const mongooseSetup = require('./setups/mongooseSetup');
-const discoverySetup = require('./setups/discoverySetup');
+//const discoverySetup = require('./setups/discoverySetup');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');

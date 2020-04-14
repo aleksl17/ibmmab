@@ -1,5 +1,3 @@
-import Scraper
-import WebSearch
 def main():
     print("heelo worl")
 

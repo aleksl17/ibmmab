@@ -7,6 +7,8 @@
 var app = require('../app');
 var debug = require('debug')('backend:server');
 var http = require('http');
+const discoverySetup = require('../setups/discoverySetup');
+const anData = require('../models/AnalysisData');
 
 /**
  * Get port from environment and store in Express.
@@ -25,9 +27,19 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+async function main() {
+  server.listen(port);
+  server.on('error', onError);
+  server.on('listening', onListening);
+  //await discoverySetup.run();
+  await anData.run();
+  return 'Run Complete'
+}
+main().then(
+    console.log
+).catch(
+    console.error
+);
 
 /**
  * Normalize a port into a number, string, or false.

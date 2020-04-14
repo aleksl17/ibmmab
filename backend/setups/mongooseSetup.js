@@ -1,8 +1,9 @@
-const mongoose = require('mongoose');
+//const mongoose = require('mongoose');
 
-const anData = require('../models/AnalysisData');
+//const anData = require('../models/AnalysisData');
 
 //Mongoose database setup
+/*
 const mongooseConnect = mongoose.connect('mongodb://localhost/ibmmab', {useUnifiedTopology: true, useNewUrlParser: true});
 
 const db = mongoose.connection;
@@ -11,6 +12,7 @@ db.on('connected', console.log.bind(console, 'DB Connected!'));
 db.once('open', function() {
     // we're connected!
 });
+ */
 
 //COMMENT OUT [FROM HERE] OR A NEW ENTRY WILL BE MADE AT EVERY LAUNCH
 /*
@@ -63,4 +65,4 @@ anData.find(function (err, anDatas) {
 //Rich query example
 //anData.find({ name: /^Polar/ }, callback);
 
-module.exports = mongooseConnect;
+//module.exports = mongooseConnect;
