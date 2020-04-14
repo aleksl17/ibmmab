@@ -3,7 +3,7 @@
         <h1>Environment Analysis</h1>
         <p id="wordP" v-if="word !== ''">Word: {{word}}</p>
         <div v-if="loaded===true">
-        <p>Result ({{info.data.length}} hits):  </p>
+            <p>Result ({{info.data.length}} hits):  </p>
         <!-- We create a list, which has a element for each entry in the info-array -->
             <ul>
                 <li v-for="num in info.data.slice(0,max_entries)" v-bind:key="info.data[num]" >
@@ -25,11 +25,11 @@
                     </div>
                 </li>
             </ul>
-            <button id="loadBtn" v-on:click="loadMore">Load More</button>
+            <button class="loadBtn" v-on:click="loadMore">Load More</button>
 
         </div>
-        <div v-else-if="loaded===true && word">
-            <p>Result ({{newInfo.data.length}} hits):  </p>
+        <!-- <div v-else-if="loaded===true && word">
+            <p>Result ({{newInfo.data.length}} hits):  </p> -->
             <!-- We create a list, which has a element for each entry in the info-array -->
             <!--
             <ul>
@@ -52,10 +52,11 @@
                     </div>
                 </li>
             </ul>
-            -->
-            <button id="loadBtn" v-on:click="loadMore">Load More</button>
 
-        </div>
+
+            <button class="loadBtn" v-on:click="loadMore">Load More</button>
+
+        </div> -->
 
         <div v-else>
             <h3>Result 0 hits:</h3>
@@ -71,7 +72,7 @@
     import router from "../router";
 
     const axios = require('axios').default; //What we've using to read from the db
-    import {searchWord, store} from "../store";
+    import {searchWord, store} from "../store"; //Variables and functions shared between different components
 
 
     export default
@@ -94,7 +95,8 @@
                         // network error
                         this.errorStatus = 'Error: Network Error';
                         this.loaded = false;
-                    }else {
+                    }
+                    else {
                         console.log(error)
                     }
                 })
@@ -104,7 +106,8 @@
                         // network error
                         this.errorStatus = 'Error: Network Error';
                         this.loaded = false;
-                    }else {
+                    }
+                    else{
                         console.log(error)
                     }
                 })
@@ -173,8 +176,8 @@
                             }
                         })
                 }
-                else {
-
+                else
+                {
                     axios
                         .get('http://'+this.urlStart+':3000/api/anData?text=' + searchWord.get())
                         .catch(error => {
@@ -247,7 +250,7 @@ h4  {
     color: #565656;
 }
 
-#loadBtn
+.loadBtn
 {
     background: #30c93f;
     height: 50px;
