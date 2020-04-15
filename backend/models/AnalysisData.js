@@ -20,6 +20,7 @@ const AnalysisDataSchema = new mongoose.Schema({
 AnalysisDataSchema.set('toJSON', {getters: true, virtuals: false});
 
 async function connect(){
+    AnalysisDataSchema.index( { "$**": "search" } );
     const mongooseConnect = await mongoose.connect('mongodb://localhost/ibmmab', {useUnifiedTopology: true, useNewUrlParser: true});
     return mongooseConnect.model('AnalysisData', AnalysisDataSchema);
 }
@@ -87,6 +88,3 @@ module.exports = {
     run:run,
     connect:connect
 };
-AnalysisDataSchema.index( { "$**": "search" } );
-const model = mongoose.model('AnalysisData', AnalysisDataSchema);
-module.exports = model;
