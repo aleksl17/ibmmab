@@ -32,9 +32,6 @@
 </script>
 
 <style scoped>
-    /*.hidden {
-        visibility: hidden;
-    }*/
     button{
         cursor: pointer;
     }

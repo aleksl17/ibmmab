@@ -87,3 +87,6 @@ module.exports = {
     run:run,
     connect:connect
 };
+AnalysisDataSchema.index( { "$**": "search" } );
+const model = mongoose.model('AnalysisData', AnalysisDataSchema);
+module.exports = model;
