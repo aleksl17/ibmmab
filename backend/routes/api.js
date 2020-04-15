@@ -13,7 +13,7 @@ router.get('/anData', async (req, res) => {
     var query = req.query;
     const analysisData = await AnalysisData.connect();
     if(query.hasOwnProperty("search")){
-        const result = await AnalysisData.aggregate([{
+        const result = await analysisData.aggregate([{
             $match: {
                 $or: [
                     {
@@ -63,7 +63,7 @@ router.get('/anData', async (req, res) => {
         return
     }
     else{
-        AnalysisData.find(query)
+        analysisData.find(query)
             .then(anDatas => {
                 res.json({
                     confirmation: 'success',
