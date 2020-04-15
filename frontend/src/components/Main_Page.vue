@@ -70,9 +70,11 @@
 
 
     import router from "../router";
-
     const axios = require('axios').default; //What we've using to read from the db
     import {searchWord, store} from "../store"; //Variables and functions shared between different components
+
+    // noinspection ES6UnusedImports,ES6CheckImport
+    /*import  discovery  from "../main.js"*/
 
 
     export default
@@ -84,12 +86,10 @@
             msg: String, //The msg/title is set in App.Vue
             info: Array, //This array contains all the output from the database
             /*newInfo: Array*/
-
-
         },
         mounted:  function () {
             axios
-                .get('http://'+this.urlStart + ':3000/api/anData')
+                .get(this.urlStart)
                 .catch(error => {
                     if (!error) {
                         // network error
@@ -100,7 +100,10 @@
                         console.log(error)
                     }
                 })
-                .then(response => (this.info = response.data)) //We get all the data from database, and insert it into out info-array
+                .then(response => {
+                    this.info = response.data;
+                    console.log("db connected")
+                }) //We get all the data from database, and insert it into out info-array
                 .catch(error => {
                     if (!error.response) {
                         // network error
@@ -111,11 +114,22 @@
                         console.log(error)
                     }
                 })
+
+
+
+            /*this.discovery.query(this.queryParams)
+                    .then(queryResponse => {
+                    console.log(JSON.stringify(queryResponse, null, 2));
+                    })
+                    .catch(err => {
+                    console.log('error:', err);
+                    });*/
         },
         data() {
             return{
                 loaded: true,
-                urlStart: 'localhost'
+                urlStart: 'http://localhost:3000/api/anData',
+
 
             }
 
@@ -151,7 +165,7 @@
                 if(searchWord.get() === '')
                 {
                     axios
-                        .get('http://'+this.urlStart+':3000/api/anData')
+                        .get(this.urlStart)
                         .catch(error => {
                             if (!error) {
                                 // network error
@@ -179,7 +193,7 @@
                 else
                 {
                     axios
-                        .get('http://'+this.urlStart+':3000/api/anData?text=' + searchWord.get())
+                        .get(this.urlStart+"?search="+ searchWord.get())
                         .catch(error => {
                             if (!error) {
                                 // network error

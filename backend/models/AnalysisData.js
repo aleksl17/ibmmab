@@ -11,5 +11,6 @@ var AnalysisDataSchema = new mongoose.Schema({
 });
 
 AnalysisDataSchema.set('toJSON', {getters: true, virtuals: false});
-
-module.exports = mongoose.model('AnalysisData', AnalysisDataSchema);
+AnalysisDataSchema.index( { "$**": "search" } );
+const model = mongoose.model('AnalysisData', AnalysisDataSchema);
+module.exports = model;

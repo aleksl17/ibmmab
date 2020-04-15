@@ -1,24 +1,76 @@
 var express = require('express');
 var router = express.Router();
-
 var AnalysisData = require('../models/AnalysisData');
 
 /* Get API. */
-router.get('/anData', (req, res) => {
-    var query = req.query
-    AnalysisData.find(query)
-        .then(anDatas => {
-            res.json({
-                confirmation: 'success',
-                data: anDatas
-            })
-        })
-        .catch(err => {
+router.get('/anData', async (req, res) => {
+    var query = req.query;
+    if(query.hasOwnProperty("search")){
+        const result = await AnalysisData.aggregate([{
+            $match: {
+                $or: [
+                    {
+                        text:
+                        {
+                            $regex: query.search,
+                            '$options': "i"
+                        }
+                    },
+                    {
+                        author:
+                            {
+                                $regex: query.search,
+                                '$options': "i"
+                            }
+                    },
+                    {
+                        title:
+                            {
+                                $regex: query.search,
+                                '$options': "i"
+                            }
+                    },
+                    {
+                        url:
+                            {
+                                $regex: query.search,
+                                '$options': "i"
+                            }
+                    },
+
+
+                ]
+            }
+        }]);
+        if(!result){
             res.json({
                 confirmation: 'fail',
-                message: err.message
+                message: result.message
+            });
+            return
+        }
+        res.json({
+            confirmation: 'success',
+            data: result
+        });
+        return
+    }
+    else{
+        AnalysisData.find(query)
+            .then(anDatas => {
+                res.json({
+                    confirmation: 'success',
+                    data: anDatas
+                })
             })
-        })
+            .catch(err => {
+                res.json({
+                    confirmation: 'fail',
+                    message: err.message
+                })
+            })
+    }
+
 });
 
 /* Set via html API. */
