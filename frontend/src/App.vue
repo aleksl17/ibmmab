@@ -12,6 +12,8 @@
         <li><router-link class="btn" to="/">Home</router-link></li>
         <li><router-link class="btn" to="/about">About</router-link></li>
         <li><router-link class="btn" to="/contact">Contact</router-link></li>
+        <li class="btn" onclick="window.location='http://localhost:3000/api/anData'">Backend</li>
+        <li class="btn" onclick="window.location='https://www.ibm.com/no-en';">IBM</li>
       </ul>
     </Sidebar> <!-- Sidebar -->
     <router-view /> <!-- This one loads our actual views -->
@@ -69,6 +71,14 @@ ul.sidebar-panel-nav > li > .btn {
   display: block;
   padding-bottom: 0.5em;
 }
+  ul.sidebar-panel-nav > .btn {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.5rem;
+    display: block;
+    padding-bottom: 0.5em;
+    cursor: pointer;
+  }
 
   @import "./assets/main.css"; /* Importing an external css */
 </style>
