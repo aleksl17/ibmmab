@@ -1,15 +1,15 @@
 
 <template>
     <div class="topnav" id="topnavbar">
-        <router-link class="topnavbtn" tag="button" to="/">
+        <router-link class="topnavbtn" tag="button" to="/" replace>
             <span>Home</span>
         </router-link>
-        <button class="topnavbtn" id="btn2" onclick="window.location='http://localhost:3000/api/anData'">
-            <span>Backend</span>
-        </button>
-        <button class="topnavbtn" id="btn3" onclick="window.location='https://www.ibm.com/no-en';">
-            <span>IBM</span>
-        </button>
+        <router-link class="topnavbtn" tag="button" id="btn2" to="/about" replace>
+            <span>About</span>
+        </router-link>
+        <router-link class="topnavbtn" id="btn3" tag="button" to="/contact" replace>
+            <span>Contact</span>
+        </router-link>
     </div>
 </template>
 
