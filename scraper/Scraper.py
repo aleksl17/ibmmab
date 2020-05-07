@@ -51,7 +51,7 @@ def translate_article(article):
     article.text = no_to_en(article.text)
 
 
-def check_unwanted(article):                # Hardcodsed removals of
+def check_unwanted(article):                # Hardcoded removals of unwanted stuff
     if (len(article.text) == 0): return True
     if ("Allerede abonnent?" in article.text): return True
     if (".tv" in article.url): return True
