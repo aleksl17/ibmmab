@@ -45,7 +45,9 @@ urllib3 = "*"
 virtualenv = "*"
 Pillow = "*"
 PyYAML = "*"
-tinysegmenter = "*"
+tinysegmenter = "==0.3"
+googlenews = "*"
+pymongo = "*"
 
 [requires]
 python_version = "3.8"
