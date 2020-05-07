@@ -4,4 +4,10 @@ import pymongo
 
 myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 
-print(myclient.list_database_names())
+db = myclient.test_database
+
+#client = pymongo.MongoClient("http://localhost:3000/api/anData")            #Fix this
+
+print(myclient)
+
+

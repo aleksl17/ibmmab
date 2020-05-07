@@ -51,12 +51,13 @@ def translate_article(article):
     article.text = no_to_en(article.text)
 
 
-def check_unwanted(article):
+def check_unwanted(article):                # Hardcodsed removals of
     if (len(article.text) == 0): return True
     if ("Allerede abonnent?" in article.text): return True
     if (".tv" in article.url): return True
-    if ("tv." in article.url):
-        return True
+    if ("tv." in article.url): return True
+    if ("må ha et aktivt abonnement" in article.url): return True
+    if ("Ikke abonnent" in article.text): return True
     else:
         return False
 
@@ -111,18 +112,3 @@ def norge_klima():
         search_papers.append(temp_paper)
     return search_papers
 
-
-enda = norge_klima()
-print(len(enda))
-length = 0
-how_many = 0
-
-for item in enda:
-    print(item.url)
-    translate_article(item)
-    print(item.text)
-    length += len(item.text)
-    how_many += 1
-
-print("total length:" + str(length))
-print(length / how_many)
