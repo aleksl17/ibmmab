@@ -1,14 +1,14 @@
 <template>
   <div id="app">
-    <nav class="main-nav">
+    <nav class="main-nav"> <!-- Thin bar over the main NavBar -->
     <div class="logo">
-      IBMMAB - Alpha
+      IBMMAB - Alpha version 1
     </div>
-    <Burger></Burger>
+    <SidebarButton></SidebarButton>
     </nav>
     <NavBar></NavBar> <!-- NavBar -->
     <Sidebar>
-      <ul class="sidebar-panel-nav">
+      <ul class="sidebar-panel-nav"> <!-- Buttons for the Sidebar -->
         <li><router-link class="btn" to="/">Home</router-link></li>
         <li><router-link class="btn" to="/about">About</router-link></li>
         <li><router-link class="btn" to="/contact">Contact</router-link></li>
@@ -22,29 +22,26 @@
 
 <script>
 
-import NavBar from "./components/NavBar"; //Import Navigation-bar
-import Burger from "./components/menu/Burger"; //Import the small icon for the Menu
+import NavBar from "./components/menu/NavBar"; //Import Navigation-bar
+import SidebarButton from "./components/menu/SidebarButton"; //Import the small icon for the Menu
 import Sidebar from "./components/menu/Sidebar"; //Import Sidebar
-
-
 
 export default {
   name: 'App',
   components: { //Adding the components
     NavBar,
-    Burger,
+    SidebarButton,
     Sidebar
   },
-  created() {
-
-  }
 }
 </script>
 
 <style>
-  body{
+
+body {
     background-color: rgba(48, 186, 201, 0.14);
   }
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -71,7 +68,7 @@ ul.sidebar-panel-nav > li > .btn {
   display: block;
   padding-bottom: 0.5em;
 }
-  ul.sidebar-panel-nav > .btn {
+ul.sidebar-panel-nav > .btn {
     color: #ffffff;
     text-decoration: none;
     font-size: 1.5rem;
@@ -80,5 +77,4 @@ ul.sidebar-panel-nav > li > .btn {
     cursor: pointer;
   }
 
-  @import "./assets/main.css"; /* Importing an external css */
 </style>
