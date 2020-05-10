@@ -8,7 +8,7 @@
             <ul> <!-- We create a list, which has a element for each entry in the info-array -->
                 <li v-for="num in info.data.slice(0,max_entries)" v-bind:key="info.data[num]" >
                     <p class="output">
-                        {{num.publish_date.substr(0,10)}}</p> <!-- Publishing date -->
+                        {{num.scrape_date.substr(0,10)}}</p> <!-- Publishing date -->
                     <h3 class="output"> <!-- Article Title -->
                         {{num.title}}
                     </h3>
