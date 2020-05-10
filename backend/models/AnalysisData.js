@@ -25,40 +25,9 @@ async function connect(){
     return mongooseConnect.model('AnalysisData', AnalysisDataSchema);
 }
 
-/*
-async function jsonReader(filePath, cb) {
-    fs.readFile(filePath, (err, fileData) => {
-        if (err) {
-            return cb && cb(err)
-        }
-        try {
-            const object = JSON.parse(fileData);
-            return cb && cb(null, object)
-        } catch (err) {
-            return cb && cb(err)
-        }
-    })
-}
-
-jsonReader('./lastDate.json', (err, date) => {
-    if (err) {
-        console.log(err);
-        return
-    }
-    console.log(date.lastDate);
-});
-
-fs.writeFile('./lastDate.json', jsonString, err => {
-    if (err) {
-        console.log('Error writing to file', err);
-    } else {
-        console.log('Successfully wrote to fle');
-    }
-});
-*/
-
 async function run(){
-    let lastDate = new Date(2010);
+    let rawdata = fs.readFileSync('lastDate.json');
+    let lastDate = JSON.parse(rawdata);
     const analysisData = await connect();
     const listener = interval(1000)
         .pipe(mergeMap(x =>{
@@ -67,6 +36,9 @@ async function run(){
         .pipe(map(x =>{
             if(x.length > 0){
                 lastDate = x.slice(-1).pop().createdAt;
+                let nowDate = Date.now();
+                let writeData = JSON.stringify(nowDate);
+                fs.writeFileSync('lastdate.json', writeData);
             }
             return x
         }))
@@ -75,9 +47,9 @@ async function run(){
                 processFile(doc);
             })
         });
+    /*
     const db = mongoose.connection;
     console.log(analysisData);
-    /*
     analysisData.watch().on('change', data => {
         processFile(data);
     })
