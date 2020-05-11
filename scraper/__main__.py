@@ -25,10 +25,10 @@ def main():
         how_many += 1
         print(how_many)
         postable = topost(item)
-        post = collection.insert_one(postable)
+        #post = collection.insert_one(postable)
         print("posted")
         #print(post.inserted_id)
-        #print(postable)
+        print(postable)
 
 
 

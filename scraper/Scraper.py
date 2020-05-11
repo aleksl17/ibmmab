@@ -111,7 +111,10 @@ def norge_klima():
     temp_list = norge_klima_search()
     search_papers = []
     for paper in temp_list:
-        temp_paper = recive_and_parse(paper)
+        try:
+            temp_paper = recive_and_parse(paper)
+        except Exception:
+            continue
         if check_unwanted(temp_paper): continue
         search_papers.append(temp_paper)
     return search_papers
