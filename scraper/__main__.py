@@ -1,9 +1,16 @@
+import pymongo
+
 from Scraper import norge_klima, translate_article
 from mymongo import topost
 from googletrans import Translator
+import mymongo
 translator = Translator()
 
 def main():
+    MyClient = pymongo.MongoClient('localhost', 27017)
+    db = MyClient.ibmmab
+    collection = db.analysisdatas
+
     enda = norge_klima()
     print(len(enda))
     length = 0
@@ -18,6 +25,8 @@ def main():
         how_many += 1
         print(how_many)
         postable = topost(item)
+        #post = collection.insert_one(postable)
+        #print(post.inserted_id)
         print(postable)
 
 

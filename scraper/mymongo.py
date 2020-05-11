@@ -12,9 +12,12 @@ class mymongo:
         collection = db.analysisdatas
 
 
+
+
 #client = pymongo.MongoClient("http://localhost:3000/api/anData")            #Fix this
 def topost(article):
     article.text = article.text.replace("\n", " ")
+
     post = {
         "text": article.text,
         "title": article.title,
@@ -23,7 +26,4 @@ def topost(article):
         "scrape_date": datetime.datetime.utcnow().date(),
     }
     return post
-
-
-
 
