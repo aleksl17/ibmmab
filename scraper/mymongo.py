@@ -4,13 +4,6 @@ from newspaper import Article
 
 from pymongo import MongoClient
 
-class mymongo:
-    def __init__(self):
-        MyClient = pymongo.MongoClient('localhost', 27017)
-
-        db = MyClient.ibmmab
-        collection = db.analysisdatas
-
 
 
 
