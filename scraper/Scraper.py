@@ -43,8 +43,12 @@ def vital_info(article):
 
 
 def no_to_en(no_text):
-    translation = translator.translate(no_text, dest='en')
-    return translation.text
+    try:
+        translation = translator.translate(no_text, dest='en').text
+    except Exception:
+        return "NA"
+
+    return translation
 
 
 def translate_article(article):
