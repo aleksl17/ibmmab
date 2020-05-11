@@ -1,7 +1,6 @@
 import datetime
 import pymongo
 from newspaper import Article
-
 from pymongo import MongoClient
 
 
@@ -16,7 +15,8 @@ def topost(article):
         "title": article.title,
         "author": article.authors,
         "url": article.url,
-        "scrape_date": datetime.datetime.utcnow().date(),
+        "scrape_date": str(datetime.datetime.utcnow().date()),
+        "publish_date": article.publish_date
     }
     return post
 

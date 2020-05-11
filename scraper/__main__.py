@@ -7,7 +7,7 @@ import mymongo
 translator = Translator()
 
 def main():
-    MyClient = pymongo.MongoClient('localhost', 3000)
+    MyClient = pymongo.MongoClient('localhost', 27017)
     db = MyClient.ibmmab
     collection = db.analysisdatas
 
@@ -25,10 +25,10 @@ def main():
         how_many += 1
         print(how_many)
         postable = topost(item)
-        #post = collection.insert_one(postable)
+        post = collection.insert_one(postable)
         print("posted")
         #print(post.inserted_id)
-        print(postable)
+        #print(postable)
 
 
 
