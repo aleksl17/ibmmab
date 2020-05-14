@@ -1,6 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver import Chrome
-
+"""
 
 browser = webdriver.ChromeOptions()
 browser.add_argument("headless")
@@ -14,3 +14,4 @@ browser.get("https://www.google.com/search?q=norge+milj%C3%B8&source=lnms&tbm=nw
 for a in browser.find_elements_by_xpath('.//a'):
     print(a.get_attribute('href'))
 
+"""
