@@ -16,6 +16,7 @@ const discovery = new DiscoveryV1({
 const queryParams = {
     environmentId: process.env.WATSON_ENVIRONMENT_ID,
     collectionId: process.env.WATSON_COLLECTION_ID,
+    count: 10000,
     query: ""
 };
 
