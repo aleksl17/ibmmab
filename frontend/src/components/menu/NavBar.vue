@@ -31,7 +31,7 @@ a {
 }
 
 .topnavbtn {
-    background: #30c93f;
+    background: #6a9325;
     height: 50px;
     width:  33%; /*This changes depending on how many buttons we need.*/
     border: thin double white;

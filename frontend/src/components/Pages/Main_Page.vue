@@ -8,7 +8,8 @@
             <ul> <!-- We create a list, which has a element for each entry in the info-array -->
                 <li v-for="num in info.data.slice(0,max_entries)" v-bind:key="info.data[num]" >
                     <p class="output">
-                        {{num.scrape_date.substr(0,10)}}</p> <!-- Publishing date -->
+                        {{num.scrape_date.substr(0,10)}}</p> <!-- Scrape date - should be changed to publishing date.
+                                                          !** Getting a substr bug on publish_date when searching.**!-->
                     <h3 class="output"> <!-- Article Title -->
                         {{num.title}}
                     </h3>
@@ -48,46 +49,18 @@
     export default
     {
         name: "Main_Page",
-        props:
+        props: /* Some variables */
         {
             msg: String, //The msg/title is set in App.Vue
             info: Array, //This array contains all the output from the database
         },
-        mounted:  function () { //Loading the backend as we try to load the component.
-            axios
-                .get(this.urlStart)
-                .catch(error => {
-                    if (!error) {
-                        // network error
-                        this.errorStatus = 'Error: Network Error';
-                        this.loaded = false;
-                    }
-                    else {
-                        console.log(error)
-                    }
-                })
-                .then(response => {
-                    this.info = response.data;
-                    console.log("db connected")
-                }) //We get all the data from database, and insert it into out info-array
-                .catch(error => {
-                    if (!error.response) {
-                        // network error
-                        this.errorStatus = 'Error: Network Error';
-                        this.loaded = false;
-                    }
-                    else{
-                        console.log(error)
-                    }
-                })
-        },
-        data() {
+        data() { //Some more variables
             return{
                 loaded: true, //Making sure the page is loading, even though the backend is offline.
                 urlStart: 'http://localhost:3000/api/anData', //This must be manually changed to match where the db is.
             }
         },
-        computed: {
+        computed: { //Computed variables
             word: function () { //Get the word-function, also check if the word is changed.
                 if(searchWord.isChanged()===true)
                     searchWord.isChanged();
@@ -99,18 +72,18 @@
                 }
                 return searchWord.get();
             },
-            max_entries: function() {
-                return sharedVars.max_entries //Max amount of entries that should be loaded. Default is 10.
+            max_entries: function() {//Max amount of entries that should be loaded. Default is 10.
+                return sharedVars.max_entries
             },
         },
-        methods: {
+        methods: { //Functions
             loadMore()
             { //Loads an addition 10 results.
                 sharedVars.max_entries += 10;
                 console.log("loadMore clicked max_entries is now: " + sharedVars.max_entries);
                 router.push({ path: '/' }); //Refresh (clunky code, but works)
             },
-           searchFor()
+           searchFor() //Update output from database
             {
                 if(searchWord.get() === '')
                 {

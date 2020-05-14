@@ -39,7 +39,7 @@ export default {
 <style>
 
 body {
-    background-color: rgba(48, 186, 201, 0.14);
+    background-color: rgba(0, 24, 201, 0.11);
   }
 
 #app {

@@ -111,14 +111,17 @@ button {
 
 .sidebar-panel {
     overflow-y: auto;
-    background-color: #75c930;
+    overflow-x: hidden;
+    background-color: #6a9325;;
     position: fixed;
     right: 0;
     top: 0;
-    height: 100vh;
+    height: 91vh;
     z-index: 999;
     padding: 3rem 20px 2rem 20px;
     width: 300px;
+    border: 3px ridge #ffffff;
+    border-right: none;
 }
 
 .searchBarForm {
@@ -171,4 +174,5 @@ button {
     bottom: 100px;
     opacity: 60%;
 }
+
 </style>
