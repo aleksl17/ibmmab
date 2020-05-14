@@ -1,14 +1,46 @@
-var express = require('express');
-var router = express.Router();
-var AnalysisData = require('../models/AnalysisData');
+const express = require('express');
+const router = express.Router();
+const AnalysisData = require('../models/AnalysisData');
+//const discoverySetup = require('../setups/discoverySetup');
+const DiscoveryV1 = require('ibm-watson/discovery/v1');
+const { IamAuthenticator } = require('ibm-watson/auth');
+
+const discovery = new DiscoveryV1({
+    version: '2019-04-30',
+    authenticator: new IamAuthenticator({
+        apikey: process.env.WATSON_API_KEY,
+    }),
+    url: process.env.WATSON_URL,
+});
+
+const queryParams = {
+    environmentId: process.env.WATSON_ENVIRONMENT_ID,
+    collectionId: process.env.WATSON_COLLECTION_ID,
+    count: 10000,
+    query: ""
+};
+
+/* Get API IBM database */
+router.get('/ibmData', async (req, res) => {
+    discovery.query(queryParams)
+        .then(queryResponse => {
+            res.json({
+                confirmation: 'success',
+                data: queryResponse
+            })
+        })
+        .catch(err => {
+            res.json({
+                confirmation: 'fail',
+                message: err.message
+            })
+        });
+});
 
 
 
-//NOTE TO SELF, add support for partial search via e.g. $regex.
 
-
-
-/* Get API. */
+/* Get API local database. */
 router.get('/anData', async (req, res) => {
     var query = req.query;
     const analysisData = await AnalysisData.connect();
