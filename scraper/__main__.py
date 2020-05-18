@@ -28,7 +28,8 @@ def main():
         # length += len(item.text)
         how_many += 1
         # print(how_many)
-        try: author =item.authors[0]
+        try:
+            author = item.authors[0]
         except Exception:
             return "NA"
         postable = {
