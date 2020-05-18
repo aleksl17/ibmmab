@@ -48,6 +48,7 @@ PyYAML = "*"
 tinysegmenter = "==0.3"
 googlenews = "*"
 pymongo = "*"
+pytz = "*"
 
 [requires]
 python_version = "3.8"

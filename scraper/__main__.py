@@ -1,4 +1,5 @@
 import pymongo
+import time
 
 from Scraper import norge_klima, translate_article
 from mymongo import topost
@@ -26,6 +27,7 @@ def main():
         print(how_many)
         postable = topost(item)
         post = collection.insert_one(postable)
+        time.sleep(30)
         print("posted")
         #print(post.inserted_id)
         #print(postable)
