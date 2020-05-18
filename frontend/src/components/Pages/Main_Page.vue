@@ -1,29 +1,31 @@
 <template> <!-- This is the most important page for the frontend. Here is where we post our results from the analysis -->
     <div class="Main" id="main">
         <h1>Environment Analysis</h1> <!-- Simple header -->
-        <p id="wordP" v-if="word !== ''">Word: {{word}}</p> <!-- Displays a searchword if it exists. -->
+        <p id="wordP" v-if="word !== ''">Word: {{word}}</p> <!-- Displays a searchword, if it exists. -->
         <div v-if="loaded===true"> <!-- Check that the backend is online -->
-            <p>Result ({{info.data.length}} hits):  </p> <!-- Total length of our results. -->
+            <p>Result ({{info.data.result.matching_results}} hits):  </p> <!-- Total length of our results. -->
+            <p id="showing">Showing up to: {{max_entries}} hits. Press 'Load More' to increase results.</p>
 
             <ul> <!-- We create a list, which has a element for each entry in the info-array -->
-                <li v-for="num in info.data.slice(0,max_entries)" v-bind:key="info.data[num]" >
-                    <p class="output">
-                        {{num.scrape_date.substr(0,10)}}</p> <!-- Scrape date - should be changed to publishing date.
-                                                          !** Getting a substr bug on publish_date when searching.**!-->
+                <li v-for="num in db.slice(0,max_entries)" v-bind:key="db[num]" > <!--info.data[num] -->
+                    <div class="output" v-if="num.scrape_date !== null">
+                        {{num.scrape_date.substr(0,10)}}</div> <!-- Scrape date - should be changed to publishing date. -->
+                    <div v-else>Can't find date</div>
                     <h3 class="output"> <!-- Article Title -->
                         {{num.title}}
                     </h3>
                     <h4 class="output"> <!-- Article Author -->
                         {{num.author}}
                     </h4>
-                    <div v-if="num.sentiment === '1'"> <!-- Positive sentiment gives a happyface -->
+                    <div v-if="num.enriched_text.sentiment.document.score === 1"> <!-- Positive sentiment gives a happy face -->
                         Sentiment: <img class="smiley" src="../../assets/happysmiley.png">
                     </div>
-                    <div v-if="num.sentiment === '0'"> <!-- Negative sentiment gives a sadface -->
+                    <div v-if="num.enriched_text.sentiment.document.score === 0"> <!-- Negative sentiment gives a sad face -->
                         Sentiment: <img class="smiley" src="../../assets/sadsmiley.png">
                     </div>
+                    <div v-if="num.enriched_text.sentiment.document.score == null">Sentiment: ?</div>
                     <div> <!-- Link to the source. (Example "nrk.no/article-1" -->
-                        <a :href="num.url" >Read more</a>
+                        <a id="urlLink" :href="num.url" >Read more</a>
                     </div>
                 </li>
             </ul>
@@ -57,7 +59,8 @@
         data() { //Some more variables
             return{
                 loaded: true, //Making sure the page is loading, even though the backend is offline.
-                urlStart: 'http://localhost:3000/api/anData', //This must be manually changed to match where the db is.
+                urlStart: 'http://localhost:3000/api/ibmData', //This must be manually changed to match where the db is.
+
             }
         },
         computed: { //Computed variables
@@ -75,20 +78,28 @@
             max_entries: function() {//Max amount of entries that should be loaded. Default is 10.
                 return sharedVars.max_entries
             },
+            db: function () {
+                var temp = [];
+                temp = this.info.data.result.results;
+                temp.reverse();
+                return temp;
+            }
         },
         methods: { //Functions
             loadMore()
             { //Loads an addition 10 results.
                 sharedVars.max_entries += 10;
                 console.log("loadMore clicked max_entries is now: " + sharedVars.max_entries);
-                router.push({ path: '/' }); //Refresh (clunky code, but works)
+                router.push({ path: '/' }); //Refresh (clunky code, getting error, but works)
             },
            searchFor() //Update output from database
             {
-                if(searchWord.get() === '')
+                if(searchWord.get() === '') //If we have no searchWord, we load the entire db.
                 {
                     axios
-                        .get(this.urlStart)
+                        .post(this.urlStart, {
+                            query: ''
+                        })
                         .catch(error => {
                             if (!error)
                             {
@@ -113,11 +124,14 @@
                                 console.log(error)
                             }
                         })
+
                 }
                 else
                 {
                     axios
-                        .get(this.urlStart+"?search="+ searchWord.get())
+                        .post(this.urlStart, {
+                            query: searchWord.get()
+                        })
                         .catch(error => {
                             if (!error) {
                                 // network error
@@ -151,11 +165,10 @@ h1 {
 }
 
 ul li {
-            list-style-type: none;
-            margin: 50px 0;
-            width: 50%;
+    list-style-type: none;
+    margin: 50px 0;
+    width: 50%;
 }
-
 
 .smiley {
     height: 20px;
@@ -190,8 +203,18 @@ h4  {
     margin-bottom: 20px;
     margin-left: 30px;
 }
+
 #wordP {
     font-size: 20px;
+}
+
+#showing {
+    font-size: 12px;
+    opacity: 80%;
+}
+
+#urlLink {
+    color: blue;
 }
 
 </style>

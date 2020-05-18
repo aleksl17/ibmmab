@@ -20,7 +20,35 @@ const queryParams = {
     query: ""
 };
 
-/* Get API IBM database */
+function set(word){
+    queryParams.query = word;
+}
+
+//  Get API IBM database
+router.post('/ibmData', async (req, res) => {
+    let newQueryParams =  Object.assign({}, queryParams);
+    newQueryParams.query = req.body.query;
+    try{
+        const result = await discovery.query(newQueryParams);
+        res.json({
+            confirmation: 'success',
+            data: result
+        });
+    }catch(e){
+        res.status(400).json({
+            confirmation: 'fail',
+            message: e.message
+        });
+        return false;
+    }
+
+    return true;
+
+});
+
+
+
+/* Get API IBM database
 router.get('/ibmData', async (req, res) => {
     discovery.query(queryParams)
         .then(queryResponse => {
@@ -35,10 +63,7 @@ router.get('/ibmData', async (req, res) => {
                 message: err.message
             })
         });
-});
-
-
-
+});*/
 
 /* Get API local database. */
 router.get('/anData', async (req, res) => {
