@@ -28,10 +28,14 @@ def main():
         # length += len(item.text)
         how_many += 1
         # print(how_many)
+        try:
+            author = item.authors[0]
+        except Exception:
+            return "NA"
         postable = {
             "text": item.text.replace("\n", " "),
             "title": item.title,
-            "author": item.authors,
+            "author": author,
             "url": item.url,
             "scrape_date": moment.utcnow().format('YYYYMMDDhhmmss'),
             "publish_date": item.publish_date,
