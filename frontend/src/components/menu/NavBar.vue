@@ -1,6 +1,5 @@
-
 <template>
-    <div class="topnav" id="topnavbar">
+    <div class="topnav" id="topnavbar"> <!-- This is a simple menu on top of the page, using router-links. -->
         <router-link class="topnavbtn" tag="button" to="/" replace>
             <span>Home</span>
         </router-link>
@@ -13,45 +12,28 @@
     </div>
 </template>
 
-<script>
-    export default {
-        name: "Nav_Bar"
-    }
-
-
-
-
-</script>
-
 <style scoped>
+/*Styling for the menu*/
+a {
+    color: white;
+}
 
-a
-{
-        color: white;
-
-
-    }
-
-.topnav
-{
+.topnav {
     width: 100%;
     height: auto;
     alignment: top;
-
 }
 
-#topnavbar
-{
-
+#topnavbar {
     content: "";
     display: table;
     clear: both;
 }
-.topnavbtn
-{
-    background: #30c93f;
+
+.topnavbtn {
+    background: #6a9325;
     height: 50px;
-    width:  33%;
+    width:  33%; /*This changes depending on how many buttons we need.*/
     border: thin double white;
     float: left;
     color: white;
@@ -59,12 +41,9 @@ a
     line-height: 50px;
     font-size: 18px;
     outline: 0;
-
-
 }
 
-.topnavbtn span
-{
+.topnavbtn span {
     cursor: pointer;
     display: inline-block;
     position: relative;
@@ -72,7 +51,7 @@ a
 }
 
 .topnavbtn span:after {
-    content: '\00bb';
+    content: '\00bb'; /* » */
     position: absolute;
     opacity: 0;
     top: 0;
@@ -88,6 +67,4 @@ a
     opacity: 1;
     right: 0;
 }
-
-
 </style>
