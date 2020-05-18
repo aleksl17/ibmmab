@@ -8,8 +8,8 @@
 
             <ul> <!-- We create a list, which has a element for each entry in the info-array -->
                 <li v-for="num in db.slice(0,max_entries)" v-bind:key="db[num]" > <!--info.data[num] -->
-                    <div class="output" v-if="num.scrape_date !== null">
-                        {{num.scrape_date.substr(0,10)}}</div> <!-- Scrape date - should be changed to publishing date. -->
+                    <div class="output" v-if="num.publish_date !== null">
+                        {{num.publish_date.substr(0,10)}}</div> <!-- Scrape date - should be changed to publishing date. -->
                     <div v-else>Can't find date</div>
                     <h3 class="output"> <!-- Article Title -->
                         {{num.title}}
@@ -17,13 +17,13 @@
                     <h4 class="output"> <!-- Article Author -->
                         {{num.author}}
                     </h4>
-                    <div v-if="num.enriched_text.sentiment.document.score === 1"> <!-- Positive sentiment gives a happy face -->
+                    <div v-if="num.enriched_text.sentiment.document.score >= 0"> <!-- Positive sentiment gives a happy face -->
                         Sentiment: <img class="smiley" src="../../assets/happysmiley.png">
                     </div>
-                    <div v-if="num.enriched_text.sentiment.document.score === 0"> <!-- Negative sentiment gives a sad face -->
+                    <div v-else-if="num.enriched_text.sentiment.document.score <= 0"> <!-- Negative sentiment gives a sad face -->
                         Sentiment: <img class="smiley" src="../../assets/sadsmiley.png">
                     </div>
-                    <div v-if="num.enriched_text.sentiment.document.score == null">Sentiment: ?</div>
+                    <div v-else-if="num.enriched_text.sentiment.document.score == null">Sentiment: ?</div>
                     <div> <!-- Link to the source. (Example "nrk.no/article-1" -->
                         <a id="urlLink" :href="num.url" >Read more</a>
                     </div>
