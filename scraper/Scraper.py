@@ -98,7 +98,7 @@ def Dagbladet_miljo():
 
 
 def norge_klima():                      # Google search using "norge klima" as the search
-    temp_list = norge_klima_search()
+    temp_list = norge_klima_search(3)
     search_papers = []
     for paper in temp_list:
         try:
