@@ -33,10 +33,8 @@ npm run build
 npm run lint
 ```
 
-## You need Axios to run
-```
-npm install axios
-```
+##To run the project: Run www on backend, and nodejs serve on frontend. 
+
 
 
 # Backend ReadMe

@@ -1,8 +1,9 @@
-<template>
+<template> <!-- Very simple about. Can easily be improved upon, but was not an important feature for the project -->
     <div id="mainDiv">
         <h2>About</h2>
-        <p> We are three students at the University of Agder, who is doing sentiment-analysis of news articles.
-            We are focusing on articles about climate and the environment, and using IBMs artificial intelligence, Watson, to do so.
+        <p>
+            We are three students at the University of Agder, who is doing sentiment-analysis of news articles.
+            We are focusing on articles about climate and the environment, and using IBMs artificial intelligence, IBM Watson, to do so.
         </p>
         <p>
             Sentiment-analysis is to figure out if the article that is being analysed is focused positive or negative, according to
@@ -28,13 +29,12 @@
 </script>
 
 <style scoped>
-    #mainDiv
-    {
-        width: 50%;
-    }
-    #us{
-        font-weight: bold;
+#mainDiv {
+    width: 50%;
+}
+#us {
+    font-weight: bold;
 
-    }
+}
 
 </style>

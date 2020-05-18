@@ -1,4 +1,5 @@
-<template>
+<template> <!-- Same reasoning as "about". Simple form that helps you send an email to one of the creators for the page.
+                Not a primary focus for the project -->
     <div>
         <h2>Contact</h2>
         <form id="form" v-on:submit.prevent="checkError">
@@ -39,34 +40,34 @@
         },
         methods:{
             submitText: function() {
-
                 console.log(this.name + this.email + this.subject);
-                var link = "mailto:thor-eivind.1995@hotmail.com" + "?cc=thoref16@uia.no" + "&subject=" + escape("Contact Request")
-                    + "&body=" + escape(this.subject + " Hilsen " + this.name);
+                var link = "mailto:thor-eivind.1995@hotmail.com" + "?cc=thoref16@uia.no" + "&subject="
+                    + escape("Contact Request") + "&body=" + escape(this.subject + " Hilsen " + this.name);
                 window.location.href = link;
-
-
-                this.name = "";
-                this.email = "";
-                this.subject = "";
+                this.name = ""; //Reset
+                this.email = ""; //Reset
+                this.subject = ""; //Reset
                 return true;
             },
+
             checkError: function (e){
-                if (this.name && this.subject) {
+                if (this.name && this.subject)
+                {
                     this.errors = [];
                     this.submitText();
                     return true;
                 }
+                this.errors = []; //Reset
 
-                this.errors = [];
-
-                if (!this.name) {
+                if (!this.name)
+                {
                     this.errors.push('Name required.');
                 }
-                if(!this.subject){
+
+                if(!this.subject)
+                {
                     this.errors.push('Subject required.');
                 }
-
                 e.preventDefault();
             }
         }
@@ -74,46 +75,44 @@
 </script>
 
 <style scoped>
-    #subject{
-        height: 200px;
-        width: 200px;
-    }
-    #submit{
-        background: #30c93f;
-        height: 50px;
-        width:  200px;
-        border: thin double white;
-        float: left;
-        color: white;
-        text-align: center;
-        line-height: 50px;
-        font-size: 18px;
-        outline: 0;
-    }
-    #submit span
-    {
-        cursor: pointer;
-        display: inline-block;
-        position: relative;
-        transition: 0.5s;
-    }
+#subject {
+    height: 200px;
+    width: 200px;
+}
+#submit {
+    background: #30c93f;
+    height: 50px;
+    width:  200px;
+    border: thin double white;
+    float: left;
+    color: white;
+    text-align: center;
+    line-height: 50px;
+    font-size: 18px;
+    outline: 0;
+}
+#submit span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
 
-    #submit span:after {
-        content: '\00bb';
-        position: absolute;
-        opacity: 0;
-        top: 0;
-        right: -20px;
-        transition: 0.5s;
-    }
+#submit span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
 
-    #submit:hover span {
-        padding-right: 25px;
-    }
+#submit:hover span {
+    padding-right: 25px;
+}
 
-    #submit:hover span:after {
-        opacity: 1;
-        right: 0;
-    }
-
+#submit:hover span:after {
+    opacity: 1;
+    right: 0;
+}
 </style>
