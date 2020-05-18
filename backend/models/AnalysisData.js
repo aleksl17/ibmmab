@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
+const moment = require('moment');
 const { processFile } = require('../setups/discoverySetup');
 const { interval } = require('rxjs');
 const { map } = require('rxjs/operators');
 const { mergeMap } = require('rxjs/operators');
-//const lastDateJson = require('./lastDate.json');
 const fs = require('fs');
 
 const AnalysisDataSchema = new mongoose.Schema({
@@ -13,8 +13,7 @@ const AnalysisDataSchema = new mongoose.Schema({
     url: {type: String, trim: true, default: ''},
     scrape_date: {type: Date, default: Date.now},
     publish_date: {type: Date, default: Date.now},
-}, {
-    timestamps: true
+    createdAt: {type: String, default: moment().utc().format('YYYYMMDDhhmmss')}
 });
 
 AnalysisDataSchema.set('toJSON', {getters: true, virtuals: false});
@@ -26,8 +25,7 @@ async function connect(){
 }
 
 async function run(){
-    let rawdata = fs.readFileSync('lastDate.json');
-    let lastDate = JSON.parse(rawdata);
+    let lastDate = fs.readFileSync('lastDate.json').toString();
     const analysisData = await connect();
     const listener = interval(1000)
         .pipe(mergeMap(x =>{
@@ -36,9 +34,7 @@ async function run(){
         .pipe(map(x =>{
             if(x.length > 0){
                 lastDate = x.slice(-1).pop().createdAt;
-                let nowDate = Date.now();
-                let writeData = JSON.stringify(nowDate);
-                fs.writeFileSync('lastdate.json', writeData);
+                fs.writeFileSync('lastDate.json', moment().utc().format('YYYYMMDDhhmmss'));
             }
             return x
         }))
@@ -47,13 +43,6 @@ async function run(){
                 processFile(doc);
             })
         });
-    /*
-    const db = mongoose.connection;
-    console.log(analysisData);
-    analysisData.watch().on('change', data => {
-        processFile(data);
-    })
-     */
 }
 
 module.exports = {

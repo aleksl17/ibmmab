@@ -37,9 +37,6 @@ router.get('/ibmData', async (req, res) => {
         });
 });
 
-
-
-
 /* Get API local database. */
 router.get('/anData', async (req, res) => {
     var query = req.query;
