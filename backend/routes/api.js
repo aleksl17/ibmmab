@@ -48,7 +48,7 @@ router.post('/ibmData', async (req, res) => {
 
 
 
-/* Get API IBM database
+/* Get API IBM database*/
 router.get('/ibmData', async (req, res) => {
     discovery.query(queryParams)
         .then(queryResponse => {
@@ -63,7 +63,7 @@ router.get('/ibmData', async (req, res) => {
                 message: err.message
             })
         });
-});*/
+});
 
 /* Get API local database. */
 router.get('/anData', async (req, res) => {

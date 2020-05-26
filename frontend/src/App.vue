@@ -12,7 +12,7 @@
         <li><router-link class="btn" to="/">Home</router-link></li>
         <li><router-link class="btn" to="/about">About</router-link></li>
         <li><router-link class="btn" to="/contact">Contact</router-link></li>
-        <li class="btn" onclick="window.location='http://localhost:3000/api/anData'">Backend</li>
+        <li class="btn" onclick="window.location='http://localhost:3000/api/ibmData'">API</li>
         <li class="btn" onclick="window.location='https://www.ibm.com/no-en';">IBM</li>
       </ul>
     </Sidebar> <!-- Sidebar -->

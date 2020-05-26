@@ -1,10 +1,11 @@
 <template> <!-- This is the most important page for the frontend. Here is where we post our results from the analysis -->
     <div class="Main" id="main">
-        <h1>Environment Analysis</h1> <!-- Simple header -->
+        <h1>Sentiment Analysis</h1> <!-- Simple header -->
         <p id="wordP" v-if="word !== ''">Word: {{word}}</p> <!-- Displays a searchword, if it exists. -->
-        <div v-if="loaded===true"> <!-- Check that the backend is online -->
+        <div v-if="loaded===true" class="content"> <!-- Check that the backend is online -->
             <p>Result ({{info.data.result.matching_results}} hits):  </p> <!-- Total length of our results. -->
-            <p id="showing">Showing up to: {{max_entries}} hits. Press 'Load More' to increase results.</p>
+            <p v-if="max_entries <= info.data.result.matching_results" class="showing">Showing up to: {{max_entries}} hits. Press 'Load More' to increase results.</p>
+            <p v-else-if="max_entries > info.data.result.matching_results" class="showing">Showing up to: {{info.data.result.matching_results}} hits.</p>
 
             <ul> <!-- We create a list, which has a element for each entry in the info-array -->
                 <li v-for="num in db.slice(0,max_entries)" v-bind:key="db[num]" > <!--info.data[num] -->
@@ -29,6 +30,7 @@
                     </div>
                 </li>
             </ul>
+            <p class="warnText" v-if="max_entries > info.data.result.matching_results">No more entries.</p>
             <button class="loadBtn" v-on:click="loadMore">Load More</button> <!-- Default numbers of loaded articles is
                                                                                 10. This button loads an additional 10,
                                                                                 until all articles are loaded. -->
@@ -53,7 +55,6 @@
         name: "Main_Page",
         props: /* Some variables */
         {
-            msg: String, //The msg/title is set in App.Vue
             info: Array, //This array contains all the output from the database
         },
         data() { //Some more variables
@@ -68,7 +69,7 @@
                 if(searchWord.isChanged()===true)
                     searchWord.isChanged();
                 try {
-                    this.searchFor(searchWord.get());
+                    this.searchFor();
                 }
                 catch (e) {
                     console.log(e)
@@ -83,7 +84,7 @@
                 temp = this.info.data.result.results;
                 temp.reverse();
                 return temp;
-            }
+            },
         },
         methods: { //Functions
             loadMore()
@@ -115,8 +116,8 @@
                         .then(response => (this.info = response.data)) //We get all the data from database, and insert it into out info-array
                         .catch(error => {
                             if (!error.response) {
-                                // network error
-                                this.errorStatus = 'Error: Network Error';
+                                // data error
+                                this.errorStatus = 'Error: Data Error';
                                 this.loaded = false;
                             }
                             else
@@ -144,8 +145,8 @@
                         .then(response => (this.info = response.data)) //We get all the data from database, and insert it into out info-array
                         .catch(error => {
                             if (!error.response) {
-                                // network error
-                                this.errorStatus = 'Error: Network Error';
+                                // data error
+                                this.errorStatus = 'Error: Data Error';
                                 this.loaded = false;
                             } else {
                                 console.log(error)
@@ -179,7 +180,6 @@ ul li {
 .output {
     width: auto;
     line-break: auto;
-    overflow: hidden;
     word-wrap: break-spaces;
     margin-top: 7px;
     margin-bottom: 7px;
@@ -204,11 +204,17 @@ h4  {
     margin-left: 30px;
 }
 
+.warnText {
+    color: red;
+    font-size: small;
+    margin-left: 33px;
+}
+
 #wordP {
     font-size: 20px;
 }
 
-#showing {
+.showing {
     font-size: 12px;
     opacity: 80%;
 }

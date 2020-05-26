@@ -4,12 +4,15 @@
         <h2>Contact</h2>
         <form id="form" v-on:submit.prevent="checkError">
 
-            <p v-if="errors.length">
+            <div v-if="errors.length">
                 <b>Please correct the following error(s):</b>
                 <ul>
                     <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
                 </ul>
-            </p>
+            </div>
+
+
+
 
             <label for="name">Name</label>
             <br/>
@@ -23,7 +26,6 @@
             <br/>
 
             <button type="submit" id="submit"><span>Submit</span></button>
-
         </form>
     </div>
 </template>
@@ -34,18 +36,18 @@
             return{
                 errors: [],
                 name: null,
-                email: null,
-                subject: null
+                subject: null,
+                mailAddress: "thoref16@uia.no",
+                otherMailAddress: "thoref16@uia.no"
             }
         },
         methods:{
             submitText: function() {
-                console.log(this.name + this.email + this.subject);
-                var link = "mailto:thor-eivind.1995@hotmail.com" + "?cc=thoref16@uia.no" + "&subject="
-                    + escape("Contact Request") + "&body=" + escape(this.subject + " Hilsen " + this.name);
+                console.log(this.name + this.subject);
+                var link = "mailto:" + this.mailAddress +"?cc=" + this.otherMailAddress + "&subject="
+                    + escape("Contact Request") + "&body=" + escape(this.subject + " From " + this.name);
                 window.location.href = link;
                 this.name = ""; //Reset
-                this.email = ""; //Reset
                 this.subject = ""; //Reset
                 return true;
             },

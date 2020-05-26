@@ -32,6 +32,7 @@
 #mainDiv {
     width: 50%;
 }
+
 #us {
     font-weight: bold;
 
