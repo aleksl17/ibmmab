@@ -4,6 +4,7 @@ from googletrans import Translator
 from google_news import norge_klima_search, search_with_inmput
 
 
+"""
 class Scraped_Article:
     def __init__(self, url):
         self.article = url
@@ -15,20 +16,12 @@ class Scraped_Article:
         self.publish_date = self.article.publish_date
         self.text = ""
 
+"""        # Scraped Article Class Ended up never being used, but could be if one wanted to make it cleaner
+
 
 translator = Translator()
-test_url = "https://www.nrk.no/urix/koronaviruset-kutter-en-firedel-av-kinas-klimagassutslipp-1.14922099"
 
-# list of places to get articles from major news sites in Norway.
-aftenposten_klima = newspaper.build("https://www.aftenposten.no/tag/Klima_og_milj%C3%B8", memoize_articles=False)
-aftenposten_miljo = newspaper.build("https://www.aftenposten.no/tag/Milj%C3%B8", memoize_articles=False)
-dagbladet_miljo = newspaper.build('https://www.dagbladet.no/emne/milj%C3%B8', memoize_articles=False)
-
-nrk_klima = "https://www.nrk.no/klima/"
-nrk_klima_og_miljø = "https://www.nrk.no/emne/klima-og-miljo-1.4295299"
-
-
-def recive_and_parse(url):
+def recive_and_parse(url):      # Downloads the article and gets it ready
     article = Article(url)
     article.download()
     article.html
@@ -36,67 +29,63 @@ def recive_and_parse(url):
     return article
 
 
-def vital_info(article):
+def vital_info(article):            #Function to get title, author and publish date from the article
     print(article.title)
     print(article.authors[0])
     print(article.publish_date)
 
 
-def no_to_en(no_text):
+def no_to_en(no_text):  #Takes in simple text
     try:
-        translation = translator.translate(no_text, dest='en').text
+        translation = translator.translate(no_text, dest='en').text     #Uses the googletrans to translate
     except Exception:
-        return "NA"
+        return "NA"             #Some articles don't like to be translated is set up for removal later.
 
-    return translation
+    return translation  #Returns translated text
 
 
-def translate_article(article):
+def translate_article(article):             # Takes in article, translates and replace the text of the article.
     article.text = no_to_en(article.text)
 
 
 def check_unwanted(article):                # Hardcoded removals of unwanted stuff
-    if (len(article.text) == 0): return True
-    if ("Allerede abonnent?" in article.text): return True
-    if (".tv" in article.url): return True
-    if ("tv." in article.url): return True
-    if ("må ha et aktivt abonnement" in article.url): return True
-    if ("Ikke abonnent" in article.text): return True
+    if (len(article.text) == 0): return True    # Removes anything where we can't get the text from the article
+    if ("Allerede abonnent?" in article.text): return True  # Removes articles behind a paywall
+    if (".tv" in article.url): return True  # Removes news that are videos not text articles
+    if ("tv." in article.url): return True  # Same as above
+    if ("må ha et aktivt abonnement" in article.url): return True # Removes articles behind a paywall
+    if ("Ikke abonnent" in article.text): return True   # Removes articles behind a paywall
     else:
         return False
 
 
-# while True:
-#     print("insert url.\n If you want to exit input 0\n")
-#     input_url = input()
-#     if input_url == 0: break
-#     article = recive_and_parse(input_url)
-#     vital_info(article)
-#     #print(article.text)
-#     print(no_to_en(article.text))
 
+"""""
 def NRK_miljo():
     NRK_paper = newspaper.build(nrk_klima, memoize_articles=False)
     NRK_papers = []
     for article in NRK_paper.articles:
         if ("www.nrk" in article.url):
-            if ("nrk.no/dokumentar" in article.url): continue
+            if ("nrk.no/dokumentar" in article.url): continue               //Started with getting 
             if ("nrk.no/video" in article.url): continue
             # print(article.url)
             news_article = recive_and_parse(article.url)
             NRK_papers.append(news_article)
             """""
+"""""
             try:
                 vital_info(news_article)
                 print(no_to_en(news_article.text))
             except IndexError as e:
                 print("error")
                 continue
-                """""
+                """""               #NRK miljo hardkoding
+"""""
     print(NRK_paper.size())
     return NRK_papers
+"""""
 
-
+"""""
 def Dagbladet_miljo():
     Dag_paper = newspaper.build('https://www.dagbladet.no/emne/milj%C3%B8', memoize_articles=False)
     Dag_papers = []
@@ -105,17 +94,18 @@ def Dagbladet_miljo():
         # temp_paper = Scraped_Article(article.url)
         Dag_papers.append(temp_paper)
     return Dag_papers
+"""""               #Dagbladet miljo hardkoding
 
 
-def norge_klima():
-    temp_list = norge_klima_search()
+def norge_klima():                      # Google search using "norge klima" as the search
+    temp_list = norge_klima_search(3)
     search_papers = []
     for paper in temp_list:
         try:
-            temp_paper = recive_and_parse(paper)
+            temp_paper = recive_and_parse(paper)        # Skips articles that won't be parsed (Could otherwise cause the program to stop)
         except Exception:
             continue
         if check_unwanted(temp_paper): continue
         search_papers.append(temp_paper)
-    return search_papers
+    return search_papers                    # Returns list of scraped articles
 
