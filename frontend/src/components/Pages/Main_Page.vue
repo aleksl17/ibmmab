@@ -60,8 +60,7 @@
         data() { //Some more variables
             return{
                 loaded: true, //Making sure the page is loading, even though the backend is offline.
-                urlStart: 'http://localhost:3000/api/ibmData', //This must be manually changed to match where the db is.
-
+                urlStart: 'http://'+window.location.hostname+':3000/api/ibmData', //This must be manually changed to match where the db is.
             }
         },
         computed: { //Computed variables
