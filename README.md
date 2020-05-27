@@ -135,7 +135,7 @@ pip install -r requirements.txt
  - make sure backend is running first.
  - run main.py
  
- #Dependencies
+##Dependencies
  Scraper uses these libraries
   - pymongo
   - Newspaper3k
