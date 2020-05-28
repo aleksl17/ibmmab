@@ -50,6 +50,4 @@ tqdm==4.46.0
 translate==3.5.0
 tzlocal==2.1
 urllib3==1.25.9
-virtualenv==20.0.20
-virtualenv-clone==0.5.4
-youtube-dl==2020.3.24
+
